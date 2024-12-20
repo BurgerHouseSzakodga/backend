@@ -26,8 +26,7 @@ return new class extends Migration
             // Idegen kulcsok beállítása
             $table->foreign(['basket_id', 'item_id'])
                   ->references(['basket_id', 'item_id']) // Pontos mezőnevek
-                  ->on('basket_items')
-                  ->onDelete('cascade');
+                  ->on('basket_items');
         });
         
     }

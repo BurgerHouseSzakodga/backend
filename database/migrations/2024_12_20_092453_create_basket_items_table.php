@@ -23,8 +23,7 @@ return new class extends Migration
             // Idegen kulcsok
             $table->foreign('basket_id')
                   ->references('basket_id')
-                  ->on('baskets')
-                  ->onDelete('cascade');
+                  ->on('baskets');
         });
         
     }
