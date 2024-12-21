@@ -16,4 +16,9 @@ class OrderController extends Controller
     {
         return Order::sum('total');
     }
+
+    public function pendingOrders()
+    {
+        return Order::where('status', '!=', 'delivered')->count();
+    }
 }

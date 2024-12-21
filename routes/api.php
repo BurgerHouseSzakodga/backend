@@ -17,7 +17,10 @@ Route::get('/menu-items', [MenuItemController::class, 'index']);
 //Admin útvonalak
 Route::middleware(['auth:sanctum', Admin::class])
     ->group(function () {
+        Route::get('/users', [UserController::class, 'index']);
         Route::get('/number-of-users', [UserController::class, 'numberOfUsers']);
         Route::get('/number-of-orders', [OrderController::class, 'numberOfOrders']);
         Route::get('/total-revenue', [OrderController::class, 'totalRevenue']);
+        Route::get('/pending-orders', [OrderController::class, 'pendingOrders']);
+        Route::put('/users/{id}', [UserController::class, 'updateIsAdmin']);
     });
