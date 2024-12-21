@@ -24,13 +24,13 @@ return new class extends Migration
         });
 
         //Sajtburger
-        Composition::create(['menu_item_id'=> 1,'ingredient_id'=> 1]);
-        Composition::create(['menu_item_id'=> 1,'ingredient_id'=> 2]);
-        Composition::create(['menu_item_id'=> 1,'ingredient_id'=> 3]);
-        Composition::create(['menu_item_id'=> 1,'ingredient_id'=> 4]);
-        Composition::create(['menu_item_id'=> 1,'ingredient_id'=> 5]);
-        Composition::create(['menu_item_id'=> 1,'ingredient_id'=> 6]);
-        Composition::create(['menu_item_id'=> 1,'ingredient_id'=> 7]);
+        Composition::create(['menu_item_id' => 1, 'ingredient_id' => 1]);
+        Composition::create(['menu_item_id' => 1, 'ingredient_id' => 2]);
+        Composition::create(['menu_item_id' => 1, 'ingredient_id' => 3]);
+        Composition::create(['menu_item_id' => 1, 'ingredient_id' => 4]);
+        Composition::create(['menu_item_id' => 1, 'ingredient_id' => 5]);
+        Composition::create(['menu_item_id' => 1, 'ingredient_id' => 6]);
+        Composition::create(['menu_item_id' => 1, 'ingredient_id' => 7]);
     }
 
     /**

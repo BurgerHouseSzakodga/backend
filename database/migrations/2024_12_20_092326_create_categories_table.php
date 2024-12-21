@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
-        Category::create(['name'=>'burgerek']);
-        Category::create(['name'=>'deszertek']);
-        Category::create(['name'=>'italok']);
-        Category::create(['name'=>'köretek']);
+        Category::create(['name' => 'burgerek']);
+        Category::create(['name' => 'deszertek']);
+        Category::create(['name' => 'italok']);
+        Category::create(['name' => 'köretek']);
     }
 
     /**

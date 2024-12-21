@@ -19,14 +19,14 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Ingredient::create(['name'=>'sajt','extra_price'=>300]);
-        Ingredient::create(['name'=>'ketchup','extra_price'=>200]);
-        Ingredient::create(['name'=>'mustár','extra_price'=>300]);
-        Ingredient::create(['name'=>'hagyma','extra_price'=>300]);
-        Ingredient::create(['name'=>'uborka','extra_price'=>300]);
-        Ingredient::create(['name'=>'buci','extra_price'=>300]);
-        Ingredient::create(['name'=>'húspogácsa','extra_price'=>500]);
-        Ingredient::create(['name'=>'bacon','extra_price'=>300]);
+        Ingredient::create(['name' => 'sajt', 'extra_price' => 300]);
+        Ingredient::create(['name' => 'ketchup', 'extra_price' => 200]);
+        Ingredient::create(['name' => 'mustár', 'extra_price' => 300]);
+        Ingredient::create(['name' => 'hagyma', 'extra_price' => 300]);
+        Ingredient::create(['name' => 'uborka', 'extra_price' => 300]);
+        Ingredient::create(['name' => 'buci', 'extra_price' => 300]);
+        Ingredient::create(['name' => 'húspogácsa', 'extra_price' => 500]);
+        Ingredient::create(['name' => 'bacon', 'extra_price' => 300]);
     }
 
     /**

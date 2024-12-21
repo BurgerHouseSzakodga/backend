@@ -39,7 +39,7 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
-        User::create(['name'=>'admin', 'email'=>'admin@admin.hu', 'password'=>'admin123', 'is_admin'=>1, 'address'=>null]);
+        User::create(['name' => 'admin', 'email' => 'admin@admin.hu', 'password' => 'admin123', 'is_admin' => true, 'address' => null]);
     }
 
     /**
