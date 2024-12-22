@@ -9,8 +9,20 @@ class MenuItem extends Model
     protected $fillable = [
         'name',
         'description',
-        'category',
+        'category_id',
         'image_path',
         'price',
     ];
+
+    protected $appends = ['category_name'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function getCategoryNameAttribute()
+    {
+        return $this->category_id ? $this->category->name : null;
+    }
 }
