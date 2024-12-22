@@ -19,6 +19,6 @@ class OrderController extends Controller
 
     public function pendingOrders()
     {
-        return Order::where('status', '!=', 'delivered')->count();
+        return Order::where('status', '!=', 'átvéve')->count();
     }
 }

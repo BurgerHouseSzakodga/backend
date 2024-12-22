@@ -23,4 +23,5 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::get('/total-revenue', [OrderController::class, 'totalRevenue']);
         Route::get('/pending-orders', [OrderController::class, 'pendingOrders']);
         Route::put('/users/{id}', [UserController::class, 'updateIsAdmin']);
+        Route::delete('/users/{id}', [UserController::class, 'destroy']);
     });

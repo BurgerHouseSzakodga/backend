@@ -19,8 +19,8 @@ return new class extends Migration
 
             $table->primary(['ingredient_id', 'menu_item_id']);
 
-            $table->foreign('ingredient_id')->references('id')->on('ingredients');
-            $table->foreign('menu_item_id')->references('id')->on('menu_items');
+            $table->foreign('ingredient_id')->references('id')->on('ingredients')->onDelete('cascade');
+            $table->foreign('menu_item_id')->references('id')->on('menu_items')->onDelete('cascade');
         });
 
         //Sajtburger

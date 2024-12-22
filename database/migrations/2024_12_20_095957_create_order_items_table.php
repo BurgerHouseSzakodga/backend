@@ -19,8 +19,8 @@ return new class extends Migration
 
             $table->primary(['order_id', 'menu_item_id']);
 
-            $table->foreign('order_id')->references('id')->on('orders');
-            $table->foreign('menu_item_id')->references('id')->on('menu_items');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('menu_item_id')->references('id')->on('menu_items')->onDelete('cascade');
         });
     }
 

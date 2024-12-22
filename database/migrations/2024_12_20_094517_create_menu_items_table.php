@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->foreignId('category')->constrained('categories');
+            $table->foreignId('category')->constrained('categories')->onDelete('cascade');
             $table->string('image_path');
             $table->integer('price');
             $table->timestamps();

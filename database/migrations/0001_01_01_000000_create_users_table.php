@@ -39,7 +39,29 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
-        User::create(['name' => 'admin', 'email' => 'admin@admin.hu', 'password' => 'admin123', 'is_admin' => true, 'address' => null]);
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.hu',
+            'password' => 'admin123',
+            'is_admin' => true,
+            'address' => '2040, Budaörs, Lévai utca 29.'
+        ]);
+
+        User::create([
+            'name' => 'Gergő',
+            'email' => 'gergolajko@gmail.com',
+            'password' => 'gergo123',
+            'is_admin' => false,
+            'address' => '2040, Budaörs, Lévai utca 29.'
+        ]);
+
+        User::create([
+            'name' => 'Ákos',
+            'email' => 'akoskosztolanyi@gmail.com',
+            'password' => 'akos123',
+            'is_admin' => false,
+            'address' => '2040, Budaörs, Lévai utca 29.'
+        ]);
     }
 
     /**
