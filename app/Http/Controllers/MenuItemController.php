@@ -28,7 +28,7 @@ class MenuItemController extends Controller
     public function updateName(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:25',
         ]);
 
         $menuItem = MenuItem::findOrFail($id);
@@ -41,7 +41,7 @@ class MenuItemController extends Controller
     public function updatePrice(Request $request, $id)
     {
         $request->validate([
-            'price' => 'required|integer|min:0',
+            'price' => 'required|integer|min:1',
         ]);
 
         $menuItem = MenuItem::findOrFail($id);
@@ -62,5 +62,28 @@ class MenuItemController extends Controller
         $menuItem->save();
 
         return response()->json(['message' => 'Category updated successfully', 'menuItem' => $menuItem]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:25',
+            'description' => 'required|string|max:100',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|integer|min:1',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $path = $request->file('image')->store('uploads', 'public');
+
+        $menuItem = MenuItem::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'image_path' => $path,
+            'price' => $request->price,
+        ]);
+
+        return response()->json(['message' => 'Menu item created successfully', 'menuItem' => $menuItem], 201);
     }
 }
