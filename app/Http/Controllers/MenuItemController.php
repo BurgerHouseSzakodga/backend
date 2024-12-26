@@ -74,7 +74,7 @@ class MenuItemController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $path = $request->file('image')->store('uploads/images', 'public');
+        $path = $request->file('image')->store('uploads', 'public');
 
         $menuItem = MenuItem::create([
             'name' => $request->name,
