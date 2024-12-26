@@ -74,13 +74,13 @@ class MenuItemController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $path = $request->file('image')->store('uploads', 'public');
+        $path = $request->file('image')->store('uploads/images', 'public');
 
         $menuItem = MenuItem::create([
             'name' => $request->name,
             'description' => $request->description,
             'category_id' => $request->category_id,
-            'image_path' => $path,
+            'image_path' => 'http://localhost:8000/storage/' . $path,
             'price' => $request->price,
         ]);
 
