@@ -27,10 +27,78 @@ return new class extends Migration
         Composition::create(['menu_item_id' => 1, 'ingredient_id' => 1]);
         Composition::create(['menu_item_id' => 1, 'ingredient_id' => 2]);
         Composition::create(['menu_item_id' => 1, 'ingredient_id' => 3]);
-        Composition::create(['menu_item_id' => 1, 'ingredient_id' => 4]);
         Composition::create(['menu_item_id' => 1, 'ingredient_id' => 5]);
         Composition::create(['menu_item_id' => 1, 'ingredient_id' => 6]);
         Composition::create(['menu_item_id' => 1, 'ingredient_id' => 7]);
+        Composition::create(['menu_item_id' => 1, 'ingredient_id' => 8]);
+        Composition::create(['menu_item_id' => 1, 'ingredient_id' => 10]);
+        Composition::create(['menu_item_id' => 1, 'ingredient_id' => 15]);
+
+        //Baconsajtburger
+        Composition::create(['menu_item_id' => 2, 'ingredient_id' => 1]);
+        Composition::create(['menu_item_id' => 2, 'ingredient_id' => 2]);
+        Composition::create(['menu_item_id' => 2, 'ingredient_id' => 3]);
+        Composition::create(['menu_item_id' => 2, 'ingredient_id' => 5]);
+        Composition::create(['menu_item_id' => 2, 'ingredient_id' => 6]);
+        Composition::create(['menu_item_id' => 2, 'ingredient_id' => 7]);
+        Composition::create(['menu_item_id' => 2, 'ingredient_id' => 8]);
+        Composition::create(['menu_item_id' => 2, 'ingredient_id' => 10]);
+        Composition::create(['menu_item_id' => 2, 'ingredient_id' => 11]);
+        Composition::create(['menu_item_id' => 2, 'ingredient_id' => 15]);
+
+        //Csirkeburger
+        Composition::create(['menu_item_id' => 3, 'ingredient_id' => 1]);
+        Composition::create(['menu_item_id' => 3, 'ingredient_id' => 4]);
+        Composition::create(['menu_item_id' => 3, 'ingredient_id' => 7]);
+        Composition::create(['menu_item_id' => 3, 'ingredient_id' => 8]);
+        Composition::create(['menu_item_id' => 3, 'ingredient_id' => 13]);
+        Composition::create(['menu_item_id' => 3, 'ingredient_id' => 15]);
+
+        //Vega burger
+        Composition::create(['menu_item_id' => 4, 'ingredient_id' => 1]);
+        Composition::create(['menu_item_id' => 4, 'ingredient_id' => 4]);
+        Composition::create(['menu_item_id' => 4, 'ingredient_id' => 7]);
+        Composition::create(['menu_item_id' => 4, 'ingredient_id' => 8]);
+        Composition::create(['menu_item_id' => 4, 'ingredient_id' => 14]);
+        Composition::create(['menu_item_id' => 4, 'ingredient_id' => 15]);
+
+        //Dupla sajtburger
+        Composition::create(['menu_item_id' => 5, 'ingredient_id' => 1]);
+        Composition::create(['menu_item_id' => 5, 'ingredient_id' => 2]);
+        Composition::create(['menu_item_id' => 5, 'ingredient_id' => 3]);
+        Composition::create(['menu_item_id' => 5, 'ingredient_id' => 5]);
+        Composition::create(['menu_item_id' => 5, 'ingredient_id' => 6]);
+        Composition::create(['menu_item_id' => 5, 'ingredient_id' => 7]);
+        Composition::create(['menu_item_id' => 5, 'ingredient_id' => 8]);
+        Composition::create(['menu_item_id' => 5, 'ingredient_id' => 10]);
+        Composition::create(['menu_item_id' => 5, 'ingredient_id' => 11]);
+        Composition::create(['menu_item_id' => 5, 'ingredient_id' => 15]);
+
+        //Chilis burger
+        Composition::create(['menu_item_id' => 6, 'ingredient_id' => 1]);
+        Composition::create(['menu_item_id' => 6, 'ingredient_id' => 2]);
+        Composition::create(['menu_item_id' => 6, 'ingredient_id' => 3]);
+        Composition::create(['menu_item_id' => 6, 'ingredient_id' => 5]);
+        Composition::create(['menu_item_id' => 6, 'ingredient_id' => 6]);
+        Composition::create(['menu_item_id' => 6, 'ingredient_id' => 7]);
+        Composition::create(['menu_item_id' => 6, 'ingredient_id' => 8]);
+        Composition::create(['menu_item_id' => 6, 'ingredient_id' => 9]);
+        Composition::create(['menu_item_id' => 6, 'ingredient_id' => 10]);
+        Composition::create(['menu_item_id' => 6, 'ingredient_id' => 15]);
+
+        //Halas burger
+        Composition::create(['menu_item_id' => 7, 'ingredient_id' => 1]);
+        Composition::create(['menu_item_id' => 7, 'ingredient_id' => 4]);
+        Composition::create(['menu_item_id' => 7, 'ingredient_id' => 7]);
+        Composition::create(['menu_item_id' => 7, 'ingredient_id' => 8]);
+        Composition::create(['menu_item_id' => 7, 'ingredient_id' => 12]);
+        Composition::create(['menu_item_id' => 7, 'ingredient_id' => 15]);
+
+        //Grill szendvics
+        Composition::create(['menu_item_id' => 8, 'ingredient_id' => 1]);
+        Composition::create(['menu_item_id' => 8, 'ingredient_id' => 8]);
+        Composition::create(['menu_item_id' => 8, 'ingredient_id' => 11]);
+        Composition::create(['menu_item_id' => 8, 'ingredient_id' => 16]);
     }
 
     /**

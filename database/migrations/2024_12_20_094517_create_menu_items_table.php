@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->string('image_path');
+            $table->string('image_path')->unique();
             $table->integer('price');
             $table->timestamps();
         });
+
         MenuItem::create(['name' => 'sajtburger', 'description' => 'Marhahúspogácsa zsemlében, ömlesztett cheddar sajtszelettel, savanyú uborkával, hagymával, ketchuppal és mustárral.', 'category_id' => 1, 'image_path' => 'http://localhost:8000/images/cheeseburger.jpg', 'price' => 1490]);
         MenuItem::create(['name' => 'baconsajtburger', 'description' => 'Marhahúspogácsa zsemlében, bacon szeletekkel, cheddar sajttal, salátával és BBQ szósszal.', 'category_id' => 1, 'image_path' => 'http://localhost:8000/images/baconburger.jpg', 'price' => 1690]);
         MenuItem::create(['name' => 'csirkeburger', 'description' => 'Ropogós csirkemell zsemlében, salátával, paradicsommal és majonézzel.', 'category_id' => 1, 'image_path' => 'http://localhost:8000/images/chickenburger.jpg', 'price' => 1390]);
