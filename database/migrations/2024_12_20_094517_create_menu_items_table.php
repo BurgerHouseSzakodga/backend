@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('menu_items', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('description');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->string('image_path')->unique();

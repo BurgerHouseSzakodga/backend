@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Composition;
 use App\Models\MenuItem;
 use Illuminate\Http\Request;
 
@@ -72,6 +73,8 @@ class MenuItemController extends Controller
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer|min:1',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'composition' => 'required|array|min:1',
+            'composition.*' => 'exists:ingredients,id',
         ]);
 
         $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
@@ -84,6 +87,13 @@ class MenuItemController extends Controller
             'image_path' => 'http://localhost:8000/images/' . $imageName,
             'price' => $request->price,
         ]);
+
+        foreach ($request->composition as $ingredientId) {
+            Composition::create([
+                'menu_item_id' => $menuItem->id,
+                'ingredient_id' => $ingredientId,
+            ]);
+        }
 
         return response()->json(['message' => 'Menu item created successfully', 'menuItem' => $menuItem], 201);
     }

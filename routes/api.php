@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
@@ -24,6 +25,7 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::get('/number-of-orders', [OrderController::class, 'numberOfOrders']);
         Route::get('/total-revenue', [OrderController::class, 'totalRevenue']);
         Route::get('/pending-orders', [OrderController::class, 'pendingOrders']);
+        Route::get('/ingredients', [IngredientController::class, 'index']);
 
         Route::put('/users/{id}', [UserController::class, 'updateIsAdmin']);
 
