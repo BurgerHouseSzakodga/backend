@@ -32,6 +32,17 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'email.required' => 'Az email cím megadása kötelező.',
+            'email.string' => 'Az email cím csak szöveget tartalmazhat.',
+            'email.email' => 'Az email cím formátuma érvénytelen.',
+            'password.required' => 'A jelszó megadása kötelező.',
+            'password.string' => 'A jelszó csak szöveget tartalmazhat.',
+        ];
+    }
+
     /**
      * Attempt to authenticate the request's credentials.
      *
@@ -80,6 +91,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
     }
 }
