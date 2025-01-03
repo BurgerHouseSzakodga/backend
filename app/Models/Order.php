@@ -10,5 +10,6 @@ class Order extends Model
         'user',
         'status',
         'total',
+        'created_at'
     ];
 }

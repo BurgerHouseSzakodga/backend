@@ -24,6 +24,7 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::get('/number-of-users', [UserController::class, 'numberOfUsers']);
         Route::get('/number-of-orders', [OrderController::class, 'numberOfOrders']);
         Route::get('/total-revenue', [OrderController::class, 'totalRevenue']);
+        Route::get('/revenue-by-days/{days}', [OrderController::class, 'revenueByDays']);
         Route::get('/pending-orders', [OrderController::class, 'pendingOrders']);
         Route::get('/ingredients', [IngredientController::class, 'index']);
 

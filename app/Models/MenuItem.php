@@ -21,6 +21,13 @@ class MenuItem extends Model
         return $this->belongsTo(Category::class);
     }
 
+
+    public function compositions()
+    {
+        return $this->hasMany(Composition::class);
+    }
+
+
     public function getCategoryNameAttribute()
     {
         return $this->category_id ? $this->category->name : null;
