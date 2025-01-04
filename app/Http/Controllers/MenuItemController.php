@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MenuItemRequest;
 use App\Models\Composition;
 use App\Models\MenuItem;
-use Illuminate\Http\Request;
 
 class MenuItemController extends Controller
 {
@@ -54,6 +53,26 @@ class MenuItemController extends Controller
         return response()->json(['message' => 'Category updated successfully', 'menuItem' => $menuItem]);
     }
 
+    public function updateImage(MenuItemRequest $request, $id)
+    {
+        $menuItem = MenuItem::findOrFail($id);
+
+        if ($menuItem->image_path) {
+            $oldImagePath = public_path(parse_url($menuItem->image_path, PHP_URL_PATH));
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        }
+
+        $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+        $request->file('image')->move(public_path('images'), $imageName);
+
+        $menuItem->image_path = 'http://localhost:8000/images/' . $imageName;
+        $menuItem->save();
+
+        return response()->json(['message' => 'Image updated successfully', 'menuItem' => $menuItem]);
+    }
+
     public function store(MenuItemRequest $request)
     {
         $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
@@ -74,6 +93,38 @@ class MenuItemController extends Controller
             ]);
         }
 
-        return response()->json(['message' => 'Menu item created successfully', 'menuItem' => $menuItem], 201);
+        $menuItem->load('compositions');
+        $compositionIds = $menuItem->compositions->pluck('ingredient_id');
+
+        return response()->json([
+            'message' => 'Menu item created successfully',
+            'menuItem' => [
+                'id' => $menuItem->id,
+                'name' => $menuItem->name,
+                'description' => $menuItem->description,
+                'image_path' => $menuItem->image_path,
+                'price' => $menuItem->price,
+                'category_id' => $menuItem->category_id,
+                'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+                'compositions' => $compositionIds,
+            ],
+
+        ], 201);
+    }
+
+    public function destroy($id)
+    {
+        $menuItem = MenuItem::findOrFail($id);
+
+        if ($menuItem->image_path) {
+            $imagePath = public_path(parse_url($menuItem->image_path, PHP_URL_PATH));
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        $menuItem->delete();
+
+        return response()->json(['message' => 'Menu item deleted successfully']);
     }
 }

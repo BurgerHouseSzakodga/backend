@@ -31,10 +31,12 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::put('/users/{id}', [UserController::class, 'updateIsAdmin']);
 
         Route::delete('/users/{id}', [UserController::class, 'destroy']);
+        Route::delete('/menu-items/{id}', [MenuItemController::class, 'destroy']);
 
         Route::put('/menu-items/{id}/name', [MenuItemController::class, 'updateName']);
         Route::put('/menu-items/{id}/price', [MenuItemController::class, 'updatePrice']);
         Route::put('/menu-items/{id}/category', [MenuItemController::class, 'updateCategory']);
+        Route::put('/menu-items/{id}/image', [MenuItemController::class, 'updateImage']);
 
         Route::post('/menu-items', [MenuItemController::class, 'store']);
     });
