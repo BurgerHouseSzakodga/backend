@@ -16,6 +16,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 //Guest útvonalak
 Route::get('/menu-items', [MenuItemController::class, 'index']);
 Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/ingredients', [IngredientController::class, 'index']);
 
 //Admin útvonalak
 Route::middleware(['auth:sanctum', Admin::class])
@@ -26,7 +27,6 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::get('/total-revenue', [OrderController::class, 'totalRevenue']);
         Route::get('/revenue-by-days/{days}', [OrderController::class, 'revenueByDays']);
         Route::get('/pending-orders', [OrderController::class, 'pendingOrders']);
-        Route::get('/ingredients', [IngredientController::class, 'index']);
 
         Route::put('/users/{id}', [UserController::class, 'updateIsAdmin']);
 
