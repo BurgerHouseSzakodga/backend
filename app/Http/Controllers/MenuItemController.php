@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MenuItemRequest;
+use App\Http\Requests\UpdateMenuItemRequest;
 use App\Models\Composition;
 use App\Models\MenuItem;
 
@@ -26,7 +27,7 @@ class MenuItemController extends Controller
             });
     }
 
-    public function updateName(MenuItemRequest $request, $id)
+    public function updateName(UpdateMenuItemRequest $request, $id)
     {
         $menuItem = MenuItem::findOrFail($id);
         $menuItem->name = $request->name;
@@ -35,7 +36,7 @@ class MenuItemController extends Controller
         return response()->json(['message' => 'Name updated successfully', 'menuItem' => $menuItem]);
     }
 
-    public function updatePrice(MenuItemRequest $request, $id)
+    public function updatePrice(UpdateMenuItemRequest $request, $id)
     {
         $menuItem = MenuItem::findOrFail($id);
         $menuItem->price = $request->price;
@@ -44,7 +45,7 @@ class MenuItemController extends Controller
         return response()->json(['message' => 'Price updated successfully', 'menuItem' => $menuItem]);
     }
 
-    public function updateCategory(MenuItemRequest $request, $id)
+    public function updateCategory(UpdateMenuItemRequest $request, $id)
     {
         $menuItem = MenuItem::findOrFail($id);
         $menuItem->category_id = $request->category_id;
@@ -53,7 +54,7 @@ class MenuItemController extends Controller
         return response()->json(['message' => 'Category updated successfully', 'menuItem' => $menuItem]);
     }
 
-    public function updateImage(MenuItemRequest $request, $id)
+    public function updateImage(UpdateMenuItemRequest $request, $id)
     {
         $menuItem = MenuItem::findOrFail($id);
 
