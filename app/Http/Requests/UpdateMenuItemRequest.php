@@ -23,7 +23,7 @@ class UpdateMenuItemRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|max:25',
-            'description' => 'sometimes|required|string|max:100',
+            'description' => 'sometimes|required|string|max:250',
             'category_id' => 'sometimes|required|exists:categories,id',
             'price' => 'sometimes|required|integer|min:1|max:100000',
             'image' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif|max:2048',

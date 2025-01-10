@@ -33,7 +33,47 @@ class MenuItemController extends Controller
         $menuItem->name = $request->name;
         $menuItem->save();
 
-        return response()->json(['message' => 'Name updated successfully', 'menuItem' => $menuItem]);
+        $menuItem->load('compositions');
+        $compositionIds = $menuItem->compositions->pluck('ingredient_id');
+
+        return response()->json([
+            'message' => 'Name updated successfully',
+            'menuItem' => [
+                'id' => $menuItem->id,
+                'name' => $menuItem->name,
+                'description' => $menuItem->description,
+                'image_path' => $menuItem->image_path,
+                'price' => $menuItem->price,
+                'category_id' => $menuItem->category_id,
+                'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+                'compositions' => $compositionIds,
+            ],
+
+        ], 201);
+    }
+
+    public function updateDescription(UpdateMenuItemRequest $request, $id)
+    {
+        $menuItem = MenuItem::findOrFail($id);
+        $menuItem->description = $request->description;
+        $menuItem->save();
+
+        $menuItem->load('compositions');
+        $compositionIds = $menuItem->compositions->pluck('ingredient_id');
+
+        return response()->json([
+            'message' => 'Description updated successfully',
+            'menuItem' => [
+                'id' => $menuItem->id,
+                'name' => $menuItem->name,
+                'description' => $menuItem->description,
+                'image_path' => $menuItem->image_path,
+                'price' => $menuItem->price,
+                'category_id' => $menuItem->category_id,
+                'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+                'compositions' => $compositionIds,
+            ],
+        ], 201);
     }
 
     public function updatePrice(UpdateMenuItemRequest $request, $id)
@@ -42,7 +82,23 @@ class MenuItemController extends Controller
         $menuItem->price = $request->price;
         $menuItem->save();
 
-        return response()->json(['message' => 'Price updated successfully', 'menuItem' => $menuItem]);
+        $menuItem->load('compositions');
+        $compositionIds = $menuItem->compositions->pluck('ingredient_id');
+
+        return response()->json([
+            'message' => 'Price updated successfully',
+            'menuItem' => [
+                'id' => $menuItem->id,
+                'name' => $menuItem->name,
+                'description' => $menuItem->description,
+                'image_path' => $menuItem->image_path,
+                'price' => $menuItem->price,
+                'category_id' => $menuItem->category_id,
+                'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+                'compositions' => $compositionIds,
+            ],
+
+        ], 201);
     }
 
     public function updateCategory(UpdateMenuItemRequest $request, $id)
@@ -51,7 +107,54 @@ class MenuItemController extends Controller
         $menuItem->category_id = $request->category_id;
         $menuItem->save();
 
-        return response()->json(['message' => 'Category updated successfully', 'menuItem' => $menuItem]);
+        $menuItem->load('compositions');
+        $compositionIds = $menuItem->compositions->pluck('ingredient_id');
+
+        return response()->json([
+            'message' => 'Category updated successfully',
+            'menuItem' => [
+                'id' => $menuItem->id,
+                'name' => $menuItem->name,
+                'description' => $menuItem->description,
+                'image_path' => $menuItem->image_path,
+                'price' => $menuItem->price,
+                'category_id' => $menuItem->category_id,
+                'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+                'compositions' => $compositionIds,
+            ],
+
+        ], 201);
+    }
+
+    public function updateComposition(UpdateMenuItemRequest $request, $id)
+    {
+        $menuItem = MenuItem::findOrFail($id);
+
+        Composition::where('menu_item_id', $menuItem->id)->delete();
+
+        foreach ($request->composition as $ingredientId) {
+            Composition::create([
+                'menu_item_id' => $menuItem->id,
+                'ingredient_id' => $ingredientId,
+            ]);
+        }
+
+        $menuItem->load('compositions');
+        $compositionIds = $menuItem->compositions->pluck('ingredient_id');
+
+        return response()->json([
+            'message' => 'Composition updated successfully',
+            'menuItem' => [
+                'id' => $menuItem->id,
+                'name' => $menuItem->name,
+                'description' => $menuItem->description,
+                'image_path' => $menuItem->image_path,
+                'price' => $menuItem->price,
+                'category_id' => $menuItem->category_id,
+                'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+                'compositions' => $compositionIds,
+            ],
+        ], 201);
     }
 
     public function updateImage(UpdateMenuItemRequest $request, $id)

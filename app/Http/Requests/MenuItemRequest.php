@@ -23,7 +23,7 @@ class MenuItemRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:25',
-            'description' => 'required|string|max:100',
+            'description' => 'required|string|max:250',
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer|min:1|max:100000',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
