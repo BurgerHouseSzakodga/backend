@@ -19,6 +19,7 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:10'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'address' => ['required', 'string', 'max:80']
         ];
     }
 
@@ -37,6 +38,9 @@ class RegisterRequest extends FormRequest
             'password.string' => 'A jelszó csak szöveget tartalmazhat.',
             'password.min' => 'A jelszónak legalább 8 karakter hosszúnak kell lennie.',
             'password.confirmed' => 'A jelszó megerősítése nem egyezik.',
+            'address.required' => 'A cim megadása kötelező.',
+            'address.string' => 'A cim csak szöveget tartalmazhat.',
+            'address.max' => 'A cim nem lehet hosszabb, mint 80 karakter.'
         ];
     }
 }
