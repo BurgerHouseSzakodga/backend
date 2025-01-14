@@ -23,6 +23,7 @@ Route::middleware(['auth:sanctum', Admin::class])
     ->group(function () {
         Route::get('/users', [UserController::class, 'index']);
         Route::get('/number-of-users', [UserController::class, 'numberOfUsers']);
+        Route::get('/orders', [OrderController::class, 'index']);
         Route::get('/number-of-orders', [OrderController::class, 'numberOfOrders']);
         Route::get('/total-revenue', [OrderController::class, 'totalRevenue']);
         Route::get('/revenue-by-days/{days}', [OrderController::class, 'revenueByDays']);

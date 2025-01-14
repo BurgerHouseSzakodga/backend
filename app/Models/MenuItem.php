@@ -27,6 +27,10 @@ class MenuItem extends Model
         return $this->hasMany(Composition::class);
     }
 
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 
     public function getCategoryNameAttribute()
     {

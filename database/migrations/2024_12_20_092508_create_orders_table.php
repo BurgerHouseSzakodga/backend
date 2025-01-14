@@ -14,95 +14,95 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('status')->default('készül');
             $table->integer('total');
             $table->timestamps();
         });
 
         Order::create([
-            'user' => 1,
+            'user_id' => 1,
             'status' => 'készül',
             'total' => 3750
         ]);
 
         Order::create([
-            'user' => 2,
+            'user_id' => 2,
             'status' => 'készül',
             'total' => 4660
         ]);
 
         Order::create([
-            'user' => 3,
+            'user_id' => 3,
             'status' => 'készül',
             'total' => 8950
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
@@ -110,70 +110,70 @@ return new class extends Migration
 
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
         ]);
 
         Order::create([
-            'user' => rand(1, 3),
+            'user_id' => rand(1, 3),
             'status' => 'átvéve',
             'total' => rand(2000, 15000),
             'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))

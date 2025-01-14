@@ -8,6 +8,28 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function index()
+    {
+        $orders = Order::with(['user', 'orderItems.menuItem'])->get();
+
+        return $orders->map(function ($order) {
+            return [
+                'id' => $order->id,
+                'user_name' => $order->user->name,
+                'total' => $order->total,
+                'status' => $order->status,
+                'created_at' => $order->created_at,
+                'updated_at' => $order->updated_at,
+                'items' => $order->orderItems->map(function ($orderItem) {
+                    return [
+                        'name' => $orderItem->menuItem->name,
+                        'quantity' => $orderItem->menu_item_quantity,
+                    ];
+                }),
+            ];
+        });
+    }
+
     public function numberOfOrders()
     {
         return Order::all()->count();
