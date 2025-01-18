@@ -174,7 +174,21 @@ class MenuItemController extends Controller
         $menuItem->image_path = 'http://localhost:8000/images/' . $imageName;
         $menuItem->save();
 
-        return response()->json(['message' => 'Image updated successfully', 'menuItem' => $menuItem]);
+
+        $menuItem->load('compositions');
+        $compositionIds = $menuItem->compositions->pluck('ingredient_id');
+
+
+        return response()->json(['message' => 'Image updated successfully', 'menuItem' => [
+            'id' => $menuItem->id,
+            'name' => $menuItem->name,
+            'description' => $menuItem->description,
+            'image_path' => $menuItem->image_path,
+            'price' => $menuItem->price,
+            'category_id' => $menuItem->category_id,
+            'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+            'compositions' => $compositionIds,
+        ],]);
     }
 
     public function store(MenuItemRequest $request)
