@@ -22,7 +22,7 @@ class MenuItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:25',
+            'name' => 'required|string|max:25|unique:menu_items,name',
             'description' => 'required|string|max:250',
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer|min:1|max:100000',
@@ -38,6 +38,7 @@ class MenuItemRequest extends FormRequest
             'name.required' => 'A név megadása kötelező.',
             'name.string' => 'A név csak szöveget tartalmazhat.',
             'name.max' => 'A név nem lehet hosszabb, mint 25 karakter.',
+            'name.unique' => 'Ez a név már foglalt.',
             'description.required' => 'A leírás megadása kötelező.',
             'description.string' => 'A leírás csak szöveget tartalmazhat.',
             'description.max' => 'A leírás nem lehet hosszabb, mint 100 karakter.',
