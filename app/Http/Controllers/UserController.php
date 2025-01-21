@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class UserController extends Controller
 {
     public function index()
@@ -38,5 +39,25 @@ class UserController extends Controller
         $user->save();
 
         return response()->json(['message' => 'User updated successfully', 'user' => $user], 200);
+    }
+
+    //ez modositja az adatokat amit frontendről elküldtem
+    public function userDataUpdate(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:6',
+        ]);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->address = $request->input('address');
+        $user->save();
+        
+        return response()->json(['user' => $user], 200);
     }
 }

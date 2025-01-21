@@ -13,6 +13,10 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Auth útvonalak
+Route::middleware('auth:sanctum')->put('/user/profile', [UserController::class, 'userDataUpdate']);
+
+
 //Guest útvonalak
 Route::get('/menu-items', [MenuItemController::class, 'index']);
 Route::get('/categories', [CategoryController::class, 'index']);
