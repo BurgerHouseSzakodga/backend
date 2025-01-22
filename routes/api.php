@@ -41,9 +41,11 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::put('/menu-items/{id}/name', [MenuItemController::class, 'updateName']);
         Route::put('/menu-items/{id}/price', [MenuItemController::class, 'updatePrice']);
         Route::put('/menu-items/{id}/category', [MenuItemController::class, 'updateCategory']);
-        Route::post('/menu-items/{id}/image', [MenuItemController::class, 'updateImage']);
         Route::put('/menu-items/{id}/description', [MenuItemController::class, 'updateDescription']);
         Route::put('/menu-items/{id}/composition', [MenuItemController::class, 'updateComposition']);
 
+        Route::put('/orders/{id}/status', [OrderController::class, 'updateStatus']);
+
+        Route::post('/menu-items/{id}/image', [MenuItemController::class, 'updateImage']);
         Route::post('/menu-items', [MenuItemController::class, 'store']);
     });
