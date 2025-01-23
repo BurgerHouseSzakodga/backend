@@ -16,6 +16,7 @@ class OrderController extends Controller
             return [
                 'id' => $order->id,
                 'user_name' => $order->user->name,
+                'delivery_address' => $order->delivery_address,
                 'total' => $order->total,
                 'status' => $order->status,
                 'created_at' => $order->created_at,
@@ -87,6 +88,7 @@ class OrderController extends Controller
         $formattedOrder = [
             'id' => $order->id,
             'user_name' => $order->user->name,
+            'delivery_address' => $order->delivery_address,
             'total' => $order->total,
             'status' => $order->status,
             'created_at' => $order->created_at,

@@ -19,7 +19,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return response()->json(['message' => 'User deleted successfully'], 200);
+        return response()->json(['message' => 'Felhasználó sikeresen törölve'], 200);
     }
 
     public function numberOfUsers()
@@ -38,7 +38,7 @@ class UserController extends Controller
         $user->is_admin = $request->input('is_admin');
         $user->save();
 
-        return response()->json(['message' => 'User updated successfully', 'user' => $user], 200);
+        return response()->json(['message' => 'Felhasználó sikeresen frissítve', 'user' => $user], 200);
     }
 
     //ez modositja az adatokat amit frontendről elküldtem
@@ -57,7 +57,7 @@ class UserController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->address = $request->input('address');
         $user->save();
-        
+
         return response()->json(['user' => $user], 200);
     }
 }

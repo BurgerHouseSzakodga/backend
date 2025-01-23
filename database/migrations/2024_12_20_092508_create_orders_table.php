@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('delivery_address')->nullable();
             $table->string('status')->default('készül');
             $table->integer('total');
             $table->timestamps();
@@ -23,7 +24,8 @@ return new class extends Migration
         Order::create([
             'user_id' => 1,
             'status' => 'készül',
-            'total' => 3750
+            'total' => 3750,
+            'delivery_address' => 'Budapest, Kossuth Lajos utca 1.'
         ]);
 
         Order::create([
@@ -35,7 +37,8 @@ return new class extends Migration
         Order::create([
             'user_id' => 3,
             'status' => 'készül',
-            'total' => 8950
+            'total' => 8950,
+            'delivery_address' => 'Budapest, Kossuth Lajos utca 2.'
         ]);
 
         Order::create([
