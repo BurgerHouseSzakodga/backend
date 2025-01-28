@@ -16,6 +16,7 @@ class OrderController extends Controller
             return [
                 'id' => $order->id,
                 'user_name' => $order->user->name,
+                'delivery_address' => $order->delivery_address,
                 'total' => $order->total,
                 'status' => $order->status,
                 'created_at' => $order->created_at,
@@ -42,7 +43,7 @@ class OrderController extends Controller
 
     public function pendingOrders()
     {
-        return Order::where('status', '!=', 'átvéve')->count();
+        return Order::where('status', '!=', 'kiszállítva')->count();
     }
 
     public function revenueByDays($days)
@@ -70,5 +71,36 @@ class OrderController extends Controller
         return [
             array_values($dates),
         ];
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:készül,kiszállítva',
+        ]);
+
+        $order = Order::findOrFail($id);
+        $order->status = $request->input('status');
+        $order->save();
+
+        $order->load(['user', 'orderItems.menuItem']);
+
+        $formattedOrder = [
+            'id' => $order->id,
+            'user_name' => $order->user->name,
+            'delivery_address' => $order->delivery_address,
+            'total' => $order->total,
+            'status' => $order->status,
+            'created_at' => $order->created_at,
+            'updated_at' => $order->updated_at,
+            'items' => $order->orderItems->map(function ($orderItem) {
+                return [
+                    'name' => $orderItem->menuItem->name,
+                    'quantity' => $orderItem->menu_item_quantity,
+                ];
+            }),
+        ];
+
+        return response()->json(['message' => 'Sikeres módosítás', 'order' => $formattedOrder]);
     }
 }

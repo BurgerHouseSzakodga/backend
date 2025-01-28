@@ -10,7 +10,8 @@ class Order extends Model
         'user_id',
         'status',
         'total',
-        'created_at'
+        'created_at',
+        'delivery_address'
     ];
 
     public function user()

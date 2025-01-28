@@ -19,7 +19,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return response()->json(['message' => 'User deleted successfully'], 200);
+        return response()->json(['message' => 'Felhasználó sikeresen törölve'], 200);
     }
 
     public function numberOfUsers()
@@ -38,43 +38,26 @@ class UserController extends Controller
         $user->is_admin = $request->input('is_admin');
         $user->save();
 
-        return response()->json(['message' => 'User updated successfully', 'user' => $user], 200);
+        return response()->json(['message' => 'Felhasználó sikeresen frissítve', 'user' => $user], 200);
     }
 
     //ez modositja az adatokat amit frontendről elküldtem
-    public function updateProfile(Request $request)
+    public function userDataUpdate(Request $request)
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         $request->validate([
-            'name' => 'string|max:255',
-            'email' => 'string|email|max:255|unique:users,email,' . $user->id,
-            'address' => 'string|max:255',
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:6',
         ]);
 
-        $user->update($request->only('name', 'email', 'address'));
-
-        return response()->json(['message' => 'Profil sikeresen frissítve!']);
-    }
-
-
-    public function changePassword(Request $request)
-    {
-        $user = auth()->user();
-
-        $request->validate([
-            'current_password' => 'required|string',
-            'new_password' => 'required|string|min:8|confirmed',
-        ]);
-
-        if (!Hash::check($request->current_password, $user->password)) {
-            return response()->json(['message' => 'A jelenlegi jelszó helytelen!'], 400);
-        }
-
-        $user->password = Hash::make($request->new_password);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->address = $request->input('address');
         $user->save();
-
-        return response()->json(['message' => 'Jelszó sikeresen módosítva!']);
+        
+        return response()->json(['user' => $user], 200);
     }
-
 }

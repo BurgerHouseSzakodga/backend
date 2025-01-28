@@ -38,7 +38,7 @@ class MenuItemController extends Controller
         $compositionIds = $menuItem->compositions->pluck('ingredient_id');
 
         return response()->json([
-            'message' => 'Name updated successfully',
+            'message' => 'Név sikeresen frissítve',
             'menuItem' => [
                 'id' => $menuItem->id,
                 'name' => $menuItem->name,
@@ -69,7 +69,7 @@ class MenuItemController extends Controller
         $compositionIds = $menuItem->compositions->pluck('ingredient_id');
 
         return response()->json([
-            'message' => 'Description updated successfully',
+            'message' => 'Leírás sikeresen frissítve',
             'menuItem' => [
                 'id' => $menuItem->id,
                 'name' => $menuItem->name,
@@ -93,7 +93,7 @@ class MenuItemController extends Controller
         $compositionIds = $menuItem->compositions->pluck('ingredient_id');
 
         return response()->json([
-            'message' => 'Price updated successfully',
+            'message' => 'Ár sikeresen frissítve',
             'menuItem' => [
                 'id' => $menuItem->id,
                 'name' => $menuItem->name,
@@ -118,7 +118,7 @@ class MenuItemController extends Controller
         $compositionIds = $menuItem->compositions->pluck('ingredient_id');
 
         return response()->json([
-            'message' => 'Category updated successfully',
+            'message' => 'Katgeória sikeresen frissítve',
             'menuItem' => [
                 'id' => $menuItem->id,
                 'name' => $menuItem->name,
@@ -150,7 +150,7 @@ class MenuItemController extends Controller
         $compositionIds = $menuItem->compositions->pluck('ingredient_id');
 
         return response()->json([
-            'message' => 'Composition updated successfully',
+            'message' => 'Összetétel sikeresen frissítve',
             'menuItem' => [
                 'id' => $menuItem->id,
                 'name' => $menuItem->name,
@@ -186,7 +186,7 @@ class MenuItemController extends Controller
         $compositionIds = $menuItem->compositions->pluck('ingredient_id');
 
 
-        return response()->json(['message' => 'Image updated successfully', 'menuItem' => [
+        return response()->json(['message' => 'Kép sikersen frissítve', 'menuItem' => [
             'id' => $menuItem->id,
             'name' => $menuItem->name,
             'description' => $menuItem->description,
@@ -222,7 +222,7 @@ class MenuItemController extends Controller
         $compositionIds = $menuItem->compositions->pluck('ingredient_id');
 
         return response()->json([
-            'message' => 'Menu item created successfully',
+            'message' => 'Étel sikeresen létrehozva',
             'menuItem' => [
                 'id' => $menuItem->id,
                 'name' => $menuItem->name,
@@ -250,6 +250,6 @@ class MenuItemController extends Controller
 
         $menuItem->delete();
 
-        return response()->json(['message' => 'Menu item deleted successfully']);
+        return response()->json(['message' => 'Étel sikeresen törölve']);
     }
 }
