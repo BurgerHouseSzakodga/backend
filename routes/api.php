@@ -17,6 +17,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/user/profile', [UserController::class, 'updateProfile']);
     Route::patch('/user/change-password', [UserController::class, 'changePassword']);
+    //összes rendelés userenként
+    Route::get('/user/order/{id}', [OrderController::class, 'userOrders']);
 });
 
 

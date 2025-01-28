@@ -40,24 +40,4 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Felhasználó sikeresen frissítve', 'user' => $user], 200);
     }
-
-    //ez modositja az adatokat amit frontendről elküldtem
-    public function userDataUpdate(Request $request)
-    {
-        $user = Auth::user();
-
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:6',
-        ]);
-
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
-        $user->address = $request->input('address');
-        $user->save();
-        
-        return response()->json(['user' => $user], 200);
-    }
 }

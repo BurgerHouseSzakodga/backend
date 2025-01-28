@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -102,5 +103,11 @@ class OrderController extends Controller
         ];
 
         return response()->json(['message' => 'Sikeres módosítás', 'order' => $formattedOrder]);
+    }
+
+    public function userOrders($id){
+        $user=Auth::user();
+        $orders = Order::where('user_id',$id)->with(['user', 'orderItems.menuItem'])->get();
+        return $orders;
     }
 }
