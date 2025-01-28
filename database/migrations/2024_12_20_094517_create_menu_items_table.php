@@ -31,6 +31,7 @@ return new class extends Migration
         MenuItem::create(['name' => 'chilis burger', 'description' => 'Marhahúspogácsa, jalapeno paprikával, cheddar sajttal, salátával és csípős szósszal.', 'category_id' => 1, 'image_path' => 'http://localhost:8000/images/chiliburger.jpg', 'price' => 1590]);
         MenuItem::create(['name' => 'halas burger', 'description' => 'Ropogós halfilé zsemlében, salátával, tartármártással és citrommal.', 'category_id' => 1, 'image_path' => 'http://localhost:8000/images/fishburger.jpg', 'price' => 1490]);
         MenuItem::create(['name' => 'grill szendvics', 'description' => 'Grillezett csirkemell, pirított zsemle, salátával, paradicsommal és majonézzel.', 'category_id' => 1, 'image_path' => 'http://localhost:8000/images/grill-sandwich.jpg', 'price' => 1590]);
+        MenuItem::create(['name' => 'grill szendvics', 'description' => 'Grillezett csirkemell, pirított zsemle, salátával, paradicsommal és majonézzel.', 'category_id' => 2, 'image_path' => 'http://localhost:8000/images/grill-sandwich.jpg', 'price' => 1590]);
     }
 
     /**

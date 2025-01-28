@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -42,22 +42,39 @@ class UserController extends Controller
     }
 
     //ez modositja az adatokat amit frontendről elküldtem
-    public function userDataUpdate(Request $request)
+    public function updateProfile(Request $request)
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:6',
+            'name' => 'string|max:255',
+            'email' => 'string|email|max:255|unique:users,email,' . $user->id,
+            'address' => 'string|max:255',
         ]);
 
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
-        $user->address = $request->input('address');
-        $user->save();
-        
-        return response()->json(['user' => $user], 200);
+        $user->update($request->only('name', 'email', 'address'));
+
+        return response()->json(['message' => 'Profil sikeresen frissítve!']);
     }
+
+
+    public function changePassword(Request $request)
+    {
+        $user = auth()->user();
+
+        $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json(['message' => 'A jelenlegi jelszó helytelen!'], 400);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return response()->json(['message' => 'Jelszó sikeresen módosítva!']);
+    }
+
 }

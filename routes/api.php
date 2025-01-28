@@ -14,7 +14,11 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 //Auth útvonalak
-Route::middleware('auth:sanctum')->put('/user/profile', [UserController::class, 'userDataUpdate']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::patch('/user/profile', [UserController::class, 'updateProfile']);
+    Route::patch('/user/change-password', [UserController::class, 'changePassword']);
+});
+
 
 
 //Guest útvonalak
@@ -47,3 +51,6 @@ Route::middleware(['auth:sanctum', Admin::class])
 
         Route::post('/menu-items', [MenuItemController::class, 'store']);
     });
+
+//ételek kategóriákkal
+Route::get('/categories-with-items', [MenuItemController::class, 'getCategoriesWithItems']);

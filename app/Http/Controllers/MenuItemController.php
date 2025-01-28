@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MenuItemRequest;
 use App\Http\Requests\UpdateMenuItemRequest;
+use App\Models\Category;
 use App\Models\Composition;
 use App\Models\MenuItem;
 
@@ -50,6 +51,12 @@ class MenuItemController extends Controller
             ],
 
         ], 201);
+    }
+
+    public function getCategoriesWithItems()
+    {
+        $categories = Category::with('items')->get();
+        return response()->json($categories);
     }
 
     public function updateDescription(UpdateMenuItemRequest $request, $id)
