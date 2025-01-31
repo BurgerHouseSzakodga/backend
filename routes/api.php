@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\OrderController;
@@ -13,6 +14,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Guest útvonalak
+Route::get('/menu-items', [MenuItemController::class, 'index']);
+Route::get('/discounts', [DiscountController::class, 'index']);
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/ingredients', [IngredientController::class, 'index']);
+
 //Auth útvonalak
 Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/user/profile', [UserController::class, 'updateProfile']);
@@ -21,12 +28,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/order/{id}', [OrderController::class, 'userOrders']);
 });
 
-
-
-//Guest útvonalak
-Route::get('/menu-items', [MenuItemController::class, 'index']);
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/ingredients', [IngredientController::class, 'index']);
 
 //Admin útvonalak
 Route::middleware(['auth:sanctum', Admin::class])
@@ -42,6 +43,7 @@ Route::middleware(['auth:sanctum', Admin::class])
 
         Route::delete('/users/{id}', [UserController::class, 'destroy']);
         Route::delete('/menu-items/{id}', [MenuItemController::class, 'destroy']);
+        Route::delete('/discounts/{id}', [DiscountController::class, 'destroy']);
 
         Route::put('/menu-items/{id}/name', [MenuItemController::class, 'updateName']);
         Route::put('/menu-items/{id}/price', [MenuItemController::class, 'updatePrice']);
@@ -55,6 +57,7 @@ Route::middleware(['auth:sanctum', Admin::class])
 
         Route::post('/menu-items/{id}/image', [MenuItemController::class, 'updateImage']);
         Route::post('/menu-items', [MenuItemController::class, 'store']);
+        Route::post('/discounts/{id}', [DiscountController::class, 'store']);
     });
 
 //ételek kategóriákkal

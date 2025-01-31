@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
-            $table->double('discount_percent');
+            $table->integer('discount_amount')->default(15);
             $table->timestamps();
 
             $table->foreignId('menu_item_id')->unique()->constrained('menu_items')->onDelete('cascade');
