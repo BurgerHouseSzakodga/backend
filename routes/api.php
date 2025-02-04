@@ -17,6 +17,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 //Guest útvonalak
 Route::get('/menu-items', [MenuItemController::class, 'index']);
 Route::get('/discounts', [DiscountController::class, 'index']);
+Route::get('/not-in-discounts', [DiscountController::class, 'notInDiscounts']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/ingredients', [IngredientController::class, 'index']);
 
@@ -50,9 +51,8 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::put('/menu-items/{id}/category', [MenuItemController::class, 'updateCategory']);
         Route::put('/menu-items/{id}/description', [MenuItemController::class, 'updateDescription']);
         Route::put('/menu-items/{id}/composition', [MenuItemController::class, 'updateComposition']);
-
+        Route::put('/discounts/{id}', [DiscountController::class, 'updateDiscountAmount']);
         Route::put('/orders/{id}/status', [OrderController::class, 'updateStatus']);
-
         Route::put('/users/{id}', [UserController::class, 'updateIsAdmin']);
 
         Route::post('/menu-items/{id}/image', [MenuItemController::class, 'updateImage']);
