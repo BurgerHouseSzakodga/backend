@@ -10,7 +10,9 @@ class DiscountController extends Controller
 {
     public function index()
     {
-        $menuItemsInDiscounts = MenuItem::whereIn('id', Discount::pluck('menu_item_id'))->get();
+        $menuItemsInDiscounts = MenuItem::join('discounts', 'menu_items.id', '=', 'discounts.menu_item_id')
+            ->select('menu_items.*', 'discounts.discount_amount')
+            ->get();
         return response()->json($menuItemsInDiscounts, 200);
     }
 
