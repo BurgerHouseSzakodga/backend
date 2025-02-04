@@ -5,6 +5,7 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Admin;
 use Illuminate\Http\Request;
@@ -17,18 +18,27 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 //Guest útvonalak
 Route::get('/menu-items', [MenuItemController::class, 'index']);
 Route::get('/discounts', [DiscountController::class, 'index']);
-Route::get('/not-in-discounts', [DiscountController::class, 'notInDiscounts']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/ingredients', [IngredientController::class, 'index']);
 
 //Auth útvonalak
 Route::middleware('auth:sanctum')->group(function () {
-    Route::patch('/user/profile', [UserController::class, 'updateProfile']);
-    Route::patch('/user/change-password', [UserController::class, 'changePassword']);
-    //összes rendelés userenként
+    // routes/web.php vagy api.php
+    Route::put('/user/update-profile', [UserController::class, 'updateProfile']);
     Route::get('/user/order/{id}', [OrderController::class, 'userOrders']);
+    Route::patch('/user/name', [UserController::class, 'updateName']);
+    Route::patch('/user/email', [UserController::class, 'updateEmail']);
+    Route::patch('/user/address', [UserController::class, 'updateAddress']);
+    Route::put('/user/password', [UserController::class, 'changePassword']);
 });
 
+
+
+//Guest útvonalak
+Route::get('/menu-items', [MenuItemController::class, 'index']);
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/ingredients', [IngredientController::class, 'index']);
+Route::get('/categories-with-items', [MenuItemController::class, 'getCategoriesWithItems']);
 
 //Admin útvonalak
 Route::middleware(['auth:sanctum', Admin::class])
@@ -51,8 +61,9 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::put('/menu-items/{id}/category', [MenuItemController::class, 'updateCategory']);
         Route::put('/menu-items/{id}/description', [MenuItemController::class, 'updateDescription']);
         Route::put('/menu-items/{id}/composition', [MenuItemController::class, 'updateComposition']);
-        Route::put('/discounts/{id}', [DiscountController::class, 'updateDiscountAmount']);
+
         Route::put('/orders/{id}/status', [OrderController::class, 'updateStatus']);
+
         Route::put('/users/{id}', [UserController::class, 'updateIsAdmin']);
 
         Route::post('/menu-items/{id}/image', [MenuItemController::class, 'updateImage']);
@@ -60,5 +71,4 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::post('/discounts/{id}', [DiscountController::class, 'store']);
     });
 
-//ételek kategóriákkal
-Route::get('/categories-with-items', [MenuItemController::class, 'getCategoriesWithItems']);
+

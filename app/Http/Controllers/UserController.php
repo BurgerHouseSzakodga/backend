@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,4 +41,86 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Felhasználó sikeresen frissítve', 'user' => $user], 200);
     }
+
+    //user profil modositás
+    public function updateName(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+    
+        $user = Auth::user();
+        $user->update(['name' => $validated['name']]);
+    
+        return response()->json(['message' => 'Név sikeresen frissítve']);
+    }
+    
+    public function updateEmail(Request $request)
+{
+    $validated = $request->validate([
+        'email' => [
+            'required',
+            'string',
+            'email:rfc,dns',
+            'max:255',
+            'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+            'unique:users,email,' . auth()->id()
+        ],
+    ], [
+        'email.regex' => 'Az email címnek tartalmaznia kell @ jelet és érvényes formátumúnak kell lennie.',
+        'email.email' => 'Érvénytelen email formátum.'
+    ]);
+
+    $user = Auth::user();
+    $user->update(['email' => $validated['email']]);
+
+    return response()->json(['message' => 'Email sikeresen frissítve']);
+}
+
+public function updateAddress(Request $request)
+{
+    $validated = $request->validate([
+        'zip' => [
+            'required',
+            'string',
+            'size:4',
+            'regex:/^[0-9]{4}$/'
+        ],
+        'city' => ['required', 'string', 'max:255'],
+        'street' => ['required', 'string', 'max:255'],
+        'num' => ['required', 'string', 'max:10']
+    ], [
+        'zip.size' => 'Az irányítószámnak pontosan 4 számjegyből kell állnia.',
+        'zip.regex' => 'Az irányítószám csak számokat tartalmazhat.'
+    ]);
+
+    $user = Auth::user();
+    $fullAddress = "{$validated['zip']}, {$validated['city']}, {$validated['street']}, {$validated['num']}";
+    
+    $user->update(['address' => $fullAddress]);
+
+    return response()->json(['message' => 'Cím sikeresen frissítve']);
+}
+
+
+
+
+    public function changePassword(Request $request)
+{
+    $request->validate([
+        'current_password' => ['required', 'current_password'],
+        'new_password' => ['required', 'min:8', 'confirmed'],
+        'new_password_confirmation' => ['required']
+    ]);
+
+    $user = Auth::user();
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return response()->json([
+        'message' => 'Jelszó sikeresen módosítva'
+    ]);
+}
+   
+
 }
