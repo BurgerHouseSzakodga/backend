@@ -26,6 +26,7 @@ class UpdateMenuItemRequest extends FormRequest
             'description' => 'sometimes|string|max:250',
             'category_id' => 'sometimes|exists:categories,id',
             'price' => 'sometimes|integer|min:1|max:100000',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
             'composition' => 'sometimes|array|min:1',
             'composition.*' => 'exists:ingredients,id',
         ];
@@ -47,6 +48,10 @@ class UpdateMenuItemRequest extends FormRequest
             'price.integer' => 'Az ár csak egész szám lehet.',
             'price.min' => 'Az árnak legalább 1-nek kell lennie.',
             'price.max' => 'Az ár nem lehet nagyobb 100.000-nél.',
+            'image.required' => 'A kép megadása kötelező.',
+            'image.image' => 'A kép formátuma érvénytelen.',
+            'image.mimes' => 'A kép csak jpeg, png, jpg vagy gif formátumú lehet.',
+            'image.max' => 'A kép mérete nem lehet nagyobb, mint 2048 kilobájt.',
             'composition.required' => 'Legalább egy összetevőt ki kell választani.',
             'composition.array' => 'Az összetevők formátuma érvénytelen.',
             'composition.min' => 'Legalább egy összetevőt ki kell választani.',
