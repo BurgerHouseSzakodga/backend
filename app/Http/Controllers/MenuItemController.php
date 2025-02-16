@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateMenuItemRequest;
 use App\Models\Category;
 use App\Models\Composition;
 use App\Models\MenuItem;
+use Illuminate\Support\Facades\DB;
 
 class MenuItemController extends Controller
 {
@@ -251,5 +252,17 @@ class MenuItemController extends Controller
         $menuItem->delete();
 
         return response()->json(['message' => 'Étel sikeresen törölve']);
+    }
+
+    public function popularItems()
+    {
+        $topSoldItems = MenuItem::join('order_items', 'menu_items.id', '=', 'order_items.menu_item_id')
+            ->select('menu_items.id', 'menu_items.name', 'menu_items.description', 'menu_items.price', 'menu_items.category_id', 'menu_items.image_path', DB::raw('SUM(order_items.menu_item_quantity) as total_quantity'))
+            ->groupBy('menu_items.id', 'menu_items.name', 'menu_items.description', 'menu_items.price', 'menu_items.category_id', 'menu_items.image_path')
+            ->orderBy('total_quantity', 'desc')
+            ->take(10)
+            ->get();
+
+        return response()->json($topSoldItems, 200);
     }
 }
