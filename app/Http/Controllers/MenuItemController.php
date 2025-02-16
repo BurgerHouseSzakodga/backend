@@ -22,11 +22,81 @@ class MenuItemController extends Controller
                     'description' => $menuItem->description,
                     'image_path' => $menuItem->image_path,
                     'price' => $menuItem->price,
+                    'actual_price' => $menuItem->actual_price,
+                    'discount_amount' => $menuItem->discount_amount,
                     'category_id' => $menuItem->category_id,
                     'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
                     'compositions' => $menuItem->compositions->pluck('ingredient_id')->toArray(),
                 ];
             });
+    }
+
+    public function discountedItems()
+    {
+        return MenuItem::with(['category', 'compositions'])
+            ->where('discount_amount', '>', 0)
+            ->get()
+            ->map(function ($menuItem) {
+                return [
+                    'id' => $menuItem->id,
+                    'name' => $menuItem->name,
+                    'description' => $menuItem->description,
+                    'image_path' => $menuItem->image_path,
+                    'price' => $menuItem->price,
+                    'actual_price' => $menuItem->actual_price,
+                    'discount_amount' => $menuItem->discount_amount,
+                    'category_id' => $menuItem->category_id,
+                    'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+                    'compositions' => $menuItem->compositions->pluck('ingredient_id')->toArray(),
+                ];
+            });
+    }
+
+    public function notInDiscounts()
+    {
+        return MenuItem::with(['category', 'compositions'])
+            ->where('discount_amount', '=', 0)
+            ->get()
+            ->map(function ($menuItem) {
+                return [
+                    'id' => $menuItem->id,
+                    'name' => $menuItem->name,
+                    'description' => $menuItem->description,
+                    'image_path' => $menuItem->image_path,
+                    'price' => $menuItem->price,
+                    'actual_price' => $menuItem->actual_price,
+                    'discount_amount' => $menuItem->discount_amount,
+                    'category_id' => $menuItem->category_id,
+                    'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+                    'compositions' => $menuItem->compositions->pluck('ingredient_id')->toArray(),
+                ];
+            });
+    }
+
+    public function updateDiscountAmount(UpdateMenuItemRequest $request, $id)
+    {
+        $menuItem = MenuItem::findOrFail($id);
+        $menuItem->discount_amount = $request->discount_amount;
+        $menuItem->save();
+
+        $menuItem->load('compositions');
+        $compositionIds = $menuItem->compositions->pluck('ingredient_id');
+
+        return response()->json([
+            'message' => 'Kedvezmény sikeresen frissítve',
+            'menuItem' => [
+                'id' => $menuItem->id,
+                'name' => $menuItem->name,
+                'description' => $menuItem->description,
+                'image_path' => $menuItem->image_path,
+                'price' => $menuItem->price,
+                'actual_price' => $menuItem->actual_price,
+                'discount_amount' => $menuItem->discount_amount,
+                'category_id' => $menuItem->category_id,
+                'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+                'compositions' => $compositionIds,
+            ],
+        ], 201);
     }
 
     public function updateName(UpdateMenuItemRequest $request, $id)
@@ -46,6 +116,8 @@ class MenuItemController extends Controller
                 'description' => $menuItem->description,
                 'image_path' => $menuItem->image_path,
                 'price' => $menuItem->price,
+                'actual_price' => $menuItem->actual_price,
+                'discount_amount' => $menuItem->discount_amount,
                 'category_id' => $menuItem->category_id,
                 'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
                 'compositions' => $compositionIds,
@@ -77,6 +149,8 @@ class MenuItemController extends Controller
                 'description' => $menuItem->description,
                 'image_path' => $menuItem->image_path,
                 'price' => $menuItem->price,
+                'actual_price' => $menuItem->actual_price,
+                'discount_amount' => $menuItem->discount_amount,
                 'category_id' => $menuItem->category_id,
                 'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
                 'compositions' => $compositionIds,
@@ -101,6 +175,8 @@ class MenuItemController extends Controller
                 'description' => $menuItem->description,
                 'image_path' => $menuItem->image_path,
                 'price' => $menuItem->price,
+                'actual_price' => $menuItem->actual_price,
+                'discount_amount' => $menuItem->discount_amount,
                 'category_id' => $menuItem->category_id,
                 'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
                 'compositions' => $compositionIds,
@@ -126,6 +202,8 @@ class MenuItemController extends Controller
                 'description' => $menuItem->description,
                 'image_path' => $menuItem->image_path,
                 'price' => $menuItem->price,
+                'actual_price' => $menuItem->actual_price,
+                'discount_amount' => $menuItem->discount_amount,
                 'category_id' => $menuItem->category_id,
                 'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
                 'compositions' => $compositionIds,
@@ -158,6 +236,8 @@ class MenuItemController extends Controller
                 'description' => $menuItem->description,
                 'image_path' => $menuItem->image_path,
                 'price' => $menuItem->price,
+                'actual_price' => $menuItem->actual_price,
+                'discount_amount' => $menuItem->discount_amount,
                 'category_id' => $menuItem->category_id,
                 'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
                 'compositions' => $compositionIds,
@@ -193,6 +273,8 @@ class MenuItemController extends Controller
             'description' => $menuItem->description,
             'image_path' => $menuItem->image_path,
             'price' => $menuItem->price,
+            'actual_price' => $menuItem->actual_price,
+            'discount_amount' => $menuItem->discount_amount,
             'category_id' => $menuItem->category_id,
             'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
             'compositions' => $compositionIds,
@@ -230,6 +312,8 @@ class MenuItemController extends Controller
                 'description' => $menuItem->description,
                 'image_path' => $menuItem->image_path,
                 'price' => $menuItem->price,
+                'actual_price' => $menuItem->actual_price,
+                'discount_amount' => $menuItem->discount_amount,
                 'category_id' => $menuItem->category_id,
                 'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
                 'compositions' => $compositionIds,

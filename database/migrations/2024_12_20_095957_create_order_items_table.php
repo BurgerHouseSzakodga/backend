@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('menu_item_id');
             $table->integer('menu_item_quantity')->default(1);
+            $table->integer('buying_price')->default(0);
             $table->timestamps();
 
             $table->primary(['order_id', 'menu_item_id']);

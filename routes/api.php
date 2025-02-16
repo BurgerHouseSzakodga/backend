@@ -16,8 +16,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 //Guest útvonalak
 Route::get('/menu-items', [MenuItemController::class, 'index']);
-Route::get('/discounts', [DiscountController::class, 'index']);
-Route::get('/not-in-discounts', [DiscountController::class, 'notInDiscounts']);
+Route::get('/discounts', [MenuItemController::class, 'discountedItems']);
+Route::get('/not-in-discounts', [MenuItemController::class, 'notInDiscounts']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/ingredients', [IngredientController::class, 'index']);
 Route::get('popular-items', [MenuItemController::class, 'popularItems']);
@@ -48,20 +48,19 @@ Route::middleware(['auth:sanctum', Admin::class])
 
         Route::delete('/users/{id}', [UserController::class, 'destroy']);
         Route::delete('/menu-items/{id}', [MenuItemController::class, 'destroy']);
-        Route::delete('/discounts/{id}', [DiscountController::class, 'destroy']);
 
         Route::put('/menu-items/{id}/name', [MenuItemController::class, 'updateName']);
         Route::put('/menu-items/{id}/price', [MenuItemController::class, 'updatePrice']);
         Route::put('/menu-items/{id}/category', [MenuItemController::class, 'updateCategory']);
         Route::put('/menu-items/{id}/description', [MenuItemController::class, 'updateDescription']);
         Route::put('/menu-items/{id}/composition', [MenuItemController::class, 'updateComposition']);
-        Route::put('/discounts/{id}', [DiscountController::class, 'updateDiscountAmount']);
+        Route::put('/discounts/{id}', [MenuItemController::class, 'updateDiscountAmount']);
         Route::put('/orders/{id}/status', [OrderController::class, 'updateStatus']);
         Route::put('/users/{id}', [UserController::class, 'updateIsAdmin']);
+        Route::put('/reset-reduction/{id}', [MenuItemController::class, 'resetPriceReduction']);
 
         Route::post('/menu-items/{id}/image', [MenuItemController::class, 'updateImage']);
         Route::post('/menu-items', [MenuItemController::class, 'store']);
-        Route::post('/discounts/{id}', [DiscountController::class, 'store']);
     });
 
 //ételek kategóriákkal

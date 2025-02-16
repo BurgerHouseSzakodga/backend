@@ -12,9 +12,18 @@ class MenuItem extends Model
         'category_id',
         'image_path',
         'price',
+        'discount_amount'
     ];
 
-    protected $appends = ['category_name'];
+    protected $appends = ['category_name', 'actual_price'];
+
+    public function getActualPriceAttribute()
+    {
+        if ($this->discount_amount > 0) {
+            return (int) ($this->price - ($this->price * ($this->discount_amount / 100)));
+        }
+        return (int) $this->price;
+    }
 
     public function category()
     {
