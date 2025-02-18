@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -46,7 +47,7 @@ class UserController extends Controller
     public function updateName(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:20'],
         ]);
     
         $user = Auth::user();
@@ -105,13 +106,21 @@ public function updateAddress(Request $request)
 
 
 
-    public function changePassword(Request $request)
+public function changePassword(Request $request)
 {
-    $request->validate([
-        'current_password' => ['required', 'current_password'],
-        'new_password' => ['required', 'min:8', 'confirmed'],
-        'new_password_confirmation' => ['required']
-    ]);
+    try {
+        $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'new_password' => ['required', 'min:8', 'confirmed'],
+            'new_password_confirmation' => ['required']
+        ]);
+    } catch (ValidationException $e) {
+        $errors = $e->errors();
+        if (isset($errors['current_password'])) {
+            return response()->json(['message' => 'A jelenlegi jelszó helytelen.'], 422);
+        }
+        return response()->json(['message' => 'Hiba történt a jelszó módosítása során.'], 422);
+    }
 
     $user = Auth::user();
     $user->password = Hash::make($request->new_password);

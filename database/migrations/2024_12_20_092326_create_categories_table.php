@@ -22,10 +22,7 @@ return new class extends Migration
         Category::create(['name' => 'italok']);
         Category::create(['name' => 'köretek']);
     }
-
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::dropIfExists('categories');

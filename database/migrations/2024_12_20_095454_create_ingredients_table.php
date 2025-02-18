@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('ingredients', function (Blueprint $table) {
@@ -39,11 +37,53 @@ return new class extends Migration
 
         Ingredient::create(['name' => 'buci', 'extra_price' => 300]);
         Ingredient::create(['name' => 'toast kenyér', 'extra_price' => 300]);
+
+
+        // Tészta
+        Ingredient::create(['name' => 'tészta', 'extra_price' => 50]);
+        // Alma
+        Ingredient::create(['name' => 'alma', 'extra_price' => 0]);
+        // Cukor
+        Ingredient::create(['name' => 'cukor', 'extra_price' => 0]);
+        // Piskóta
+        Ingredient::create(['name' => 'piskóta', 'extra_price' => 100]);
+        // Csokoládékrém
+        Ingredient::create(['name' => 'csokoládékrém', 'extra_price' => 150]);
+        // Karamell
+        Ingredient::create(['name' => 'karamell', 'extra_price' => 50]);
+        // Leveles tészta
+        Ingredient::create(['name' => 'leveles tészta', 'extra_price' => 80]);
+        // Vaníliakrém
+        Ingredient::create(['name' => 'vaníliakrém', 'extra_price' => 120]);
+        // Porcukor
+        Ingredient::create(['name' => 'porcukor', 'extra_price' => 0]);
+        // Gesztenye
+        Ingredient::create(['name' => 'gesztenye', 'extra_price' => 150]);
+        // Tejszín
+        Ingredient::create(['name' => 'tejszín', 'extra_price' => 70]);
+        // Rum
+        Ingredient::create(['name' => 'rum', 'extra_price' => 100]);
+        // Babapiskóta
+        Ingredient::create(['name' => 'babapiskóta', 'extra_price' => 50]);
+        // Mascarpone
+        Ingredient::create(['name' => 'mascarpone', 'extra_price' => 200]);
+        // Kávé
+        Ingredient::create(['name' => 'kávé', 'extra_price' => 50]);
+        // Burgonya
+        Ingredient::create(['name' => 'burgonya', 'extra_price' => 0]);
+        // Só
+        Ingredient::create(['name' => 'só', 'extra_price' => 0]);
+        // Édesburgonya
+        Ingredient::create(['name' => 'édesburgonya', 'extra_price' => 100]);
+        // Fűszerkeverék
+        Ingredient::create(['name' => 'fűszerkeverék', 'extra_price' => 20]);
+
+        // Panír
+        Ingredient::create(['name' => 'panír', 'extra_price' => 40]);
+        // Káposzta
+        Ingredient::create(['name' => 'káposzta', 'extra_price' => 40]);
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('ingredients');
