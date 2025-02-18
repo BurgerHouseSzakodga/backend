@@ -13,7 +13,7 @@ class MenuItemController extends Controller
 {
     public function index()
     {
-        return MenuItem::with(['category', 'compositions'])
+        return MenuItem::with(['category', 'compositions.ingredient'])
             ->get()
             ->map(function ($menuItem) {
                 return [
@@ -29,6 +29,58 @@ class MenuItemController extends Controller
                     'compositions' => $menuItem->compositions->pluck('ingredient_id')->toArray(),
                 ];
             });
+    }
+
+    public function menuItemWithIngerdeints()
+    {
+        return MenuItem::with(['category',  'compositions.ingredient'])
+            ->get()
+            ->map(function ($menuItem) {
+                return [
+                    'id' => $menuItem->id,
+                    'name' => $menuItem->name,
+                    'description' => $menuItem->description,
+                    'image_path' => $menuItem->image_path,
+                    'price' => $menuItem->price,
+                    'actual_price' => $menuItem->actual_price,
+                    'discount_amount' => $menuItem->discount_amount,
+                    'category_id' => $menuItem->category_id,
+                    'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+                    'compositions' => $menuItem->compositions->map(function ($composition) {
+                        return [
+                            'ingredient_id' => $composition->ingredient_id,
+                            'ingredient_name' => $composition->ingredient->name,
+                            'quantity' => 1
+                        ];
+                    })->toArray(),
+                ];
+            });
+    }
+
+    public function menuItemWithIngredients($id)
+    {
+        $menuItem = MenuItem::with(['category', 'compositions.ingredient'])
+            ->findOrFail($id);
+
+        return response()->json([
+            'id' => $menuItem->id,
+            'name' => $menuItem->name,
+            'description' => $menuItem->description,
+            'image_path' => $menuItem->image_path,
+            'price' => $menuItem->price,
+            'actual_price' => $menuItem->actual_price,
+            'discount_amount' => $menuItem->discount_amount,
+            'category_id' => $menuItem->category_id,
+            'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+            'compositions' => $menuItem->compositions->map(function ($composition) {
+                return [
+                    'ingredient_id' => $composition->ingredient_id,
+                    'ingredient_name' => $composition->ingredient->name,
+                    'extra_price' => $composition->ingredient->extra_price,
+                    'quantity' => 1
+                ];
+            })->toArray(),
+        ]);
     }
 
     public function discountedItems()

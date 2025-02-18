@@ -10,4 +10,10 @@ class Composition extends Model
         'ingredient_id',
         'menu_item_id',
     ];
+
+
+    public function ingredient()
+    {
+        return $this->belongsTo(Ingredient::class);
+    }
 }
