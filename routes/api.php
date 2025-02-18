@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BasketItemsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\IngredientController;
@@ -32,6 +33,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/user/address', [UserController::class, 'updateAddress']);
     Route::put('/user/update-profile', [UserController::class, 'updateProfile']);
     Route::put('/user/password', [UserController::class, 'changePassword']);
+
+
+   
 });
 
 
@@ -66,3 +70,5 @@ Route::middleware(['auth:sanctum', Admin::class])
 
 //ételek kategóriákkal
 Route::get('/categories-with-items', [MenuItemController::class, 'getCategoriesWithItems']);
+
+//rendelés
