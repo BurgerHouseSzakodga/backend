@@ -6,6 +6,7 @@ use App\Models\Basket;
 use App\Models\BasketExtra;
 use App\Models\BasketItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BasketController extends Controller
 {
@@ -55,5 +56,20 @@ class BasketController extends Controller
         $basket->increment('total_amount', $data['actual_price']);
 
         return response()->json(['message' => 'Item added to basket successfully'], 201);
+    }
+
+    public function getUserBasket()
+    {
+        $userId = Auth::id();
+
+        $basket = Basket::with(['items.extras.ingredient', 'items.menuItem'])
+            ->where('user', $userId)
+            ->first();
+
+        if (!$basket) {
+            return response()->json(['message' => 'Basket not found'], 404);
+        }
+
+        return response()->json($basket, 200);
     }
 }

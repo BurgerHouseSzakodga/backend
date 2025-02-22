@@ -12,4 +12,14 @@ class BasketItem extends Model
         'item',
         'quantity'
     ];
+
+    public function extras()
+    {
+        return $this->hasMany(BasketExtra::class, 'basket_item_id');
+    }
+
+    public function menuItem()
+    {
+        return $this->belongsTo(MenuItem::class, 'item_id');
+    }
 }

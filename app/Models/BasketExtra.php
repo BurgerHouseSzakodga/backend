@@ -12,4 +12,14 @@ class BasketExtra extends Model
         'modification_type',
         'quantity'
     ];
+
+    public function basketItem()
+    {
+        return $this->belongsTo(BasketItem::class);
+    }
+
+    public function ingredient()
+    {
+        return $this->belongsTo(Ingredient::class, 'ingredient');
+    }
 }

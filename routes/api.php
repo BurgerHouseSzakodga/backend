@@ -31,9 +31,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/user/order/{id}', [OrderController::class, 'userOrders']);
     Route::get('menu-item/{id}', [MenuItemController::class, 'menuItemWithIngredients']);
+    Route::get('/basket', [BasketController::class, 'getUserBasket']);
+
     Route::patch('/user/name', [UserController::class, 'updateName']);
     Route::patch('/user/email', [UserController::class, 'updateEmail']);
     Route::patch('/user/address', [UserController::class, 'updateAddress']);
+
     Route::put('/user/update-profile', [UserController::class, 'updateProfile']);
     Route::put('/user/password', [UserController::class, 'changePassword']);
 });

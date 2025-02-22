@@ -11,4 +11,9 @@ class Basket extends Model
         'user',
         'total_amount'
     ];
+
+    public function items()
+    {
+        return $this->hasMany(BasketItem::class);
+    }
 }
