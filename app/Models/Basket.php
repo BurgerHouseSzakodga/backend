@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class basket extends Model
+class Basket extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'basket_id',
         'user',
         'total_amount'

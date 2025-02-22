@@ -12,17 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('basket_items', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('basket_id');
-            $table->unsignedBigInteger('item_id');
-            $table->integer('quantity');
+            $table->integer('item_id');
             $table->timestamps();
-
-            // Összetett kulcs
-            $table->primary(['basket_id', 'item_id']);
 
             // Idegen kulcsok
             $table->foreign('basket_id')
-                ->references('basket_id')
+                ->references('id')
                 ->on('baskets')->onDelete('cascade');
         });
     }

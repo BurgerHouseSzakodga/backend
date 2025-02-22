@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Basket_items extends Model
+class BasketItem extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'basket_id',
+        'item_id',
         'item',
         'quantity'
     ];

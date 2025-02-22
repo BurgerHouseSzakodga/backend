@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class BasketExtra extends Model
 {
-    protected $fillable=[
-        'basket_id',
-        'foods',
+    protected $fillable = [
+        'basket_item_id',
         'ingredient',
         'modification_type',
         'quantity'
-
     ];
 }

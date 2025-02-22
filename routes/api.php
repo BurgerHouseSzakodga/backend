@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\BasketItemsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DiscountController;
@@ -26,6 +27,8 @@ Route::get('popular-items', [MenuItemController::class, 'popularItems']);
 //Auth útvonalak
 Route::middleware('auth:sanctum')->group(function () {
     // routes/web.php vagy api.php
+    Route::post('/add-to-basket', [BasketController::class, 'addToBasket']);
+
     Route::get('/user/order/{id}', [OrderController::class, 'userOrders']);
     Route::get('menu-item/{id}', [MenuItemController::class, 'menuItemWithIngredients']);
     Route::patch('/user/name', [UserController::class, 'updateName']);
@@ -33,9 +36,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/user/address', [UserController::class, 'updateAddress']);
     Route::put('/user/update-profile', [UserController::class, 'updateProfile']);
     Route::put('/user/password', [UserController::class, 'changePassword']);
-
-
-   
 });
 
 
