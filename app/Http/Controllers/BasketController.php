@@ -29,13 +29,11 @@ class BasketController extends Controller
             'compositions.*.quantity' => 'required|integer',
         ]);
 
-        // Ensure the user has only one basket
         $basket = Basket::firstOrCreate(
             ['user' => $data['user_id']],
             ['total_amount' => 0]
         );
 
-        // Add the item to the basket_items table
         $basketItem = BasketItem::create([
             'basket_id' => $basket->id,
             'item_id' => $data['item_id'],
@@ -43,7 +41,6 @@ class BasketController extends Controller
 
         foreach ($data['compositions'] as $composition) {
             $modificationType = $composition['quantity'] > 1;
-
 
             if ($composition['quantity'] != 1) {
                 BasketExtra::create([

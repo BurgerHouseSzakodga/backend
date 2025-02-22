@@ -108,6 +108,7 @@ class MenuItemController extends Controller
     {
         return MenuItem::with(['category', 'compositions'])
             ->where('discount_amount', '=', 0)
+            ->where('category_id', '!=', 3)
             ->get()
             ->map(function ($menuItem) {
                 return [
