@@ -394,8 +394,8 @@ class MenuItemController extends Controller
     public function popularItems()
     {
         $topSoldItems = MenuItem::join('order_items', 'menu_items.id', '=', 'order_items.menu_item_id')
-            ->select('menu_items.id', 'menu_items.name', 'menu_items.description', 'menu_items.price', 'menu_items.category_id', 'menu_items.image_path', DB::raw('SUM(order_items.menu_item_quantity) as total_quantity'))
-            ->groupBy('menu_items.id', 'menu_items.name', 'menu_items.description', 'menu_items.price', 'menu_items.category_id', 'menu_items.image_path')
+            ->select('menu_items.id', 'menu_items.name', 'menu_items.description', 'menu_items.price', 'discount_amount','menu_items.category_id', 'menu_items.image_path', DB::raw('SUM(order_items.menu_item_quantity) as total_quantity'))
+            ->groupBy('menu_items.id', 'menu_items.name', 'menu_items.description', 'menu_items.price', 'discount_amount', 'menu_items.category_id', 'menu_items.image_path')
             ->orderBy('total_quantity', 'desc')
             ->take(10)
             ->get();
