@@ -400,6 +400,37 @@ class MenuItemController extends Controller
             ->take(10)
             ->get();
 
-        return response()->json($topSoldItems, 200);
+        if ($topSoldItems->count() < 10) {
+            $additionalItems = MenuItem::whereNotIn('id', $topSoldItems->pluck('id'))
+                ->take(10 - $topSoldItems->count())
+                ->get();
+
+            $topSoldItems = $topSoldItems->merge($additionalItems);
+        }
+
+        $topSoldItems->load('category', 'compositions.ingredient');
+
+        $formattedItems = $topSoldItems->map(function ($menuItem) {
+            return [
+                'id' => $menuItem->id,
+                'name' => $menuItem->name,
+                'description' => $menuItem->description,
+                'image_path' => $menuItem->image_path,
+                'price' => $menuItem->price,
+                'actual_price' => $menuItem->actual_price,
+                'discount_amount' => $menuItem->discount_amount,
+                'category_id' => $menuItem->category_id,
+                'category_name' => $menuItem->category_id ? $menuItem->category->name : null,
+                'compositions' => $menuItem->compositions->map(function ($composition) {
+                    return [
+                        'ingredient_id' => $composition->ingredient_id,
+                        'ingredient_name' => $composition->ingredient->name,
+                        'quantity' => 1
+                    ];
+                })->toArray(),
+            ];
+        });
+
+        return response()->json($formattedItems, 200);
     }
 }
