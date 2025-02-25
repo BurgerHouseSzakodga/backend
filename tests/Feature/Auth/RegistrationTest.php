@@ -15,7 +15,7 @@ test('new users can register', function () {
     $response->assertNoContent();
 });
 
-test('azonosEmailCim', function () {
+test('cant register with duplicate email', function () {
     $user = User::factory()->create([
         'email' => 'test@example.com'
     ]);
@@ -36,7 +36,4 @@ test('azonosEmailCim', function () {
             'email' => ['Ez az email cím már foglalt.']
         ]
     ]);
-
-
 });
-
