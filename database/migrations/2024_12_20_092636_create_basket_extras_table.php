@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('basket_item_id');
             $table->integer('ingredient');
-            $table->boolean('modification_type')->default(0);
             $table->integer('quantity');
 
             $table->timestamps();

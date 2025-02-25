@@ -38,16 +38,15 @@ class BasketController extends Controller
         $basketItem = BasketItem::create([
             'basket_id' => $basket->id,
             'item_id' => $data['item_id'],
+            'buying_price' => $data['actual_price']
         ]);
 
         foreach ($data['compositions'] as $composition) {
-            $modificationType = $composition['quantity'] > 1;
 
             if ($composition['quantity'] != 1) {
                 BasketExtra::create([
                     'basket_item_id' => $basketItem->id,
                     'ingredient' => $composition['ingredient_id'],
-                    'modification_type' => $modificationType,
                     'quantity' => $composition['quantity']
                 ]);
             }

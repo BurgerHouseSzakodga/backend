@@ -9,7 +9,6 @@ class BasketExtra extends Model
     protected $fillable = [
         'basket_item_id',
         'ingredient',
-        'modification_type',
         'quantity'
     ];
 

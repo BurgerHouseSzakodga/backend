@@ -10,7 +10,7 @@ class BasketItem extends Model
         'basket_id',
         'item_id',
         'item',
-        'quantity'
+        'buying_price'
     ];
 
     public function extras()
@@ -21,5 +21,10 @@ class BasketItem extends Model
     public function menuItem()
     {
         return $this->belongsTo(MenuItem::class, 'item_id');
+    }
+
+    public function basket()
+    {
+        return $this->belongsTo(Basket::class);
     }
 }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('basket_id');
             $table->integer('item_id');
+            $table->integer('buying_price');
             $table->timestamps();
 
             // Idegen kulcsok

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\BasketItemController;
 use App\Http\Controllers\BasketItemsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DiscountController;
@@ -26,7 +27,6 @@ Route::get('popular-items', [MenuItemController::class, 'popularItems']);
 
 //Auth útvonalak
 Route::middleware('auth:sanctum')->group(function () {
-    // routes/web.php vagy api.php
     Route::post('/add-to-basket', [BasketController::class, 'addToBasket']);
 
     Route::get('/user/order/{id}', [OrderController::class, 'userOrders']);
@@ -39,6 +39,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::put('/user/update-profile', [UserController::class, 'updateProfile']);
     Route::put('/user/password', [UserController::class, 'changePassword']);
+
+    Route::delete('/delete-basket-item/{id}', [BasketItemController::class, 'deleteBasketItem']);
 });
 
 
@@ -73,5 +75,3 @@ Route::middleware(['auth:sanctum', Admin::class])
 
 //ételek kategóriákkal
 Route::get('/categories-with-items', [MenuItemController::class, 'getCategoriesWithItems']);
-
-//rendelés
