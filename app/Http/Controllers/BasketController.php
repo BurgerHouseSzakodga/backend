@@ -66,9 +66,32 @@ class BasketController extends Controller
             ->first();
 
         if (!$basket) {
-            return response()->json(['message' => 'Basket not found'], 404);
+            return response()->json(['message' => 'Kosár nem találva'], 404);
         }
 
         return response()->json($basket, 200);
+    }
+
+    public function deleteBasketItem($id)
+    {
+        $userId = Auth::id();
+
+        $basketItem = BasketItem::where('id', $id)
+            ->whereHas('basket', function ($query) use ($userId) {
+                $query->where('user', $userId);
+            })
+            ->first();
+
+        if (!$basketItem) {
+            return response()->json(['message' => 'Kosár tétel nem találva'], 404);
+        }
+
+        $basket = $basketItem->basket;
+        $basket->decrement('total_amount', $basketItem->buying_price);
+
+        $basketItem->extras()->delete();
+        $basketItem->delete();
+
+        return $this->getUserBasket();
     }
 }
