@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,10 +43,10 @@ class UserController extends Controller
     }
 
     //user profil modositás
-    public function updateName(Request $request)
+     public function updateName(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:20'],
+            'name' => ['required', 'string', 'max:30'],
         ]);
     
         $user = Auth::user();
@@ -102,9 +101,6 @@ public function updateAddress(Request $request)
 
     return response()->json(['message' => 'Cím sikeresen frissítve']);
 }
-
-
-
 
 public function changePassword(Request $request)
 {
