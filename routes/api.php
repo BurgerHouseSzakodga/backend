@@ -23,21 +23,22 @@ Route::get('/not-in-discounts', [MenuItemController::class, 'notInDiscounts']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/ingredients', [IngredientController::class, 'index']);
 Route::get('popular-items', [MenuItemController::class, 'popularItems']);
+Route::get('/categories-with-items', [MenuItemController::class, 'getCategoriesWithItems']);
 
 //Auth útvonalak
 Route::middleware('auth:sanctum')->group(function () {
-    // routes/web.php vagy api.php
+   //kosárba
     Route::post('/add-to-basket', [BasketController::class, 'addToBasket']);
-
     Route::get('/user/order/{id}', [OrderController::class, 'userOrders']);
-    Route::get('menu-item/{id}', [MenuItemController::class, 'menuItemWithIngredients']);
-    Route::get('/basket', [BasketController::class, 'getUserBasket']);
 
+    Route::get('menu-item/{id}', [MenuItemController::class, 'menuItemWithIngredients']);
+   // Route::get('/basket', [BasketController::class, 'getUserBasket']);
+
+    //profil modositás
     Route::patch('/user/name', [UserController::class, 'updateName']);
     Route::patch('/user/email', [UserController::class, 'updateEmail']);
     Route::patch('/user/address', [UserController::class, 'updateAddress']);
-
-    Route::put('/user/update-profile', [UserController::class, 'updateProfile']);
+    //Route::put('/user/update-profile', [UserController::class, 'updateProfile']);
     Route::put('/user/password', [UserController::class, 'changePassword']);
 });
 
@@ -71,7 +72,4 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::post('/menu-items', [MenuItemController::class, 'store']);
     });
 
-//ételek kategóriákkal
-Route::get('/categories-with-items', [MenuItemController::class, 'getCategoriesWithItems']);
 
-//rendelés
