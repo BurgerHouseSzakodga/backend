@@ -18,6 +18,11 @@ class OrderItem extends Model
         return $this->belongsTo(Order::class);
     }
 
+    public function extras()
+    {
+        return $this->hasMany(OrderItemExtra::class);
+    }
+
     public function menuItem()
     {
         return $this->belongsTo(MenuItem::class);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Basket;
 use App\Models\BasketExtra;
 use App\Models\BasketItem;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,6 +56,38 @@ class BasketController extends Controller
         $basket->increment('total_amount', $data['actual_price']);
 
         return response()->json(['message' => 'Item added to basket successfully'], 201);
+    }
+
+    public function orderBasket()
+    {
+        $userId = Auth::id();
+
+        $basket = Basket::with(['items.extras'])->where('user', $userId)->first();
+
+        if (!$basket) {
+            return response()->json(['message' => 'Kosár nem találva'], 404);
+        }
+
+        $order = Order::create([
+            'user_id' => $userId,
+            'total' => $basket->total_amount,
+        ]);
+
+        foreach ($basket->items as $basketItem) {
+            $orderItem = $order->orderItems()->create([
+                'menu_item_id' => $basketItem->item_id,
+                'buying_price' => $basketItem->buying_price,
+            ]);
+
+            foreach ($basketItem->extras as $basketExtra) {
+                $orderItem->extras()->create([
+                    'ingredient_id' => $basketExtra->ingredient,
+                    'quantity' => $basketExtra->quantity,
+                ]);
+            }
+        }
+
+        return response()->json(['message' => 'Rendelés sikeresen leadva'], 200);
     }
 
     public function getUserBasket()

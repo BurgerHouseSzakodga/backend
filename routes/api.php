@@ -27,8 +27,9 @@ Route::get('/categories-with-items', [MenuItemController::class, 'getCategoriesW
 //Auth útvonalak
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/add-to-basket', [BasketController::class, 'addToBasket']);
-    Route::get('/user/order/{id}', [OrderController::class, 'userOrders']);
+    Route::post('/order-basket', [BasketController::class, 'orderBasket']);
 
+    Route::get('/user/order/{id}', [OrderController::class, 'userOrders']);
     Route::get('menu-item/{id}', [MenuItemController::class, 'menuItemWithIngredients']);
     Route::get('/basket', [BasketController::class, 'getUserBasket']);
 
