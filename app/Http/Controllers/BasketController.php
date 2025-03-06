@@ -55,7 +55,7 @@ class BasketController extends Controller
 
         $basket->increment('total_amount', $data['actual_price']);
 
-        return response()->json(['message' => 'Item added to basket successfully'], 201);
+        return $this->getUserBasket();
     }
 
     public function orderBasket()
