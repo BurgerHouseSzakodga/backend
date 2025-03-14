@@ -105,9 +105,17 @@ class OrderController extends Controller
         return response()->json(['message' => 'Sikeres módosítás', 'order' => $formattedOrder]);
     }
 
-    public function userOrders($id){
-        $user=Auth::user();
-        $orders = Order::where('user_id',$id)->with(['user', 'orderItems.menuItem'])->get();
+    public function userOrders($id)
+    {
+        $user = Auth::user();
+        $orders = Order::where('user_id', $id)->with(['user', 'orderItems.menuItem'])->get();
+        return $orders;
+    }
+
+    public function activeUserOrders()
+    {
+        $user = Auth::user();
+        $orders = Order::where('user_id', $user->id)->where('status', 'készül')->get();
         return $orders;
     }
 }
