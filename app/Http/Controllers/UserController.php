@@ -94,7 +94,7 @@ class UserController extends Controller
         ]);
 
         $user = Auth::user();
-        $fullAddress = "{$validated['zip']}, {$validated['city']}, {$validated['street']}, {$validated['num']}";
+        $fullAddress = "{$validated['zip']}, {$validated['city']}, {$validated['street']} utca, {$validated['num']}";
 
         $user->update(['address' => $fullAddress]);
 
@@ -141,5 +141,31 @@ class UserController extends Controller
         return response()->json([
             'message' => 'Jelszó sikeresen módosítva'
         ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:30'],
+            'email' => [
+                'required',
+                'string',
+                'email:rfc,dns',
+                'max:50',
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+                'unique:users,email,' . $request->user()->id
+            ],
+            'address' => ['nullable', 'string', 'max:100'],
+        ]);
+
+        $user = $request->user();
+
+        $user->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'address' => $validated['address'] ?: null,
+        ]);
+
+        return response()->json($user, 200); // Visszaadjuk a teljes frissített felhasználói objektumot
     }
 }
