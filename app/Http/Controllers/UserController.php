@@ -103,11 +103,19 @@ class UserController extends Controller
 
     public function updateFullAddress(Request $request)
     {
+        $validated = $request->validate([
+            'address' => ['nullable', 'string', 'max:255'],
+        ], [
+            'address.max' => 'Az cím nem lehet hosszabb 255 karakternél.',
+        ]);
+
         $user = Auth::user();
+        $user->update(['address' => $validated['address']]);
 
-        $user->update(['address' => $request->address]);
-
-        return response()->json(['message' => 'Cím sikeresen frissítve']);
+        return response()->json([
+            'message' => $validated['address'] ? 'Cím sikeresen frissítve' : 'Cím törölve',
+            'address' => $validated['address'],
+        ]);
     }
 
     public function changePassword(Request $request)
