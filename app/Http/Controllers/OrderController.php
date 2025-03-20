@@ -13,23 +13,7 @@ class OrderController extends Controller
     {
         $orders = Order::with(['user', 'orderItems.menuItem'])->get();
 
-        return $orders->map(function ($order) {
-            return [
-                'id' => $order->id,
-                'user_name' => $order->user->name,
-                'delivery_address' => $order->delivery_address,
-                'total' => $order->total,
-                'status' => $order->status,
-                'created_at' => $order->created_at,
-                'updated_at' => $order->updated_at,
-                'items' => $order->orderItems->map(function ($orderItem) {
-                    return [
-                        'name' => $orderItem->menuItem->name,
-                        'quantity' => $orderItem->menu_item_quantity,
-                    ];
-                }),
-            ];
-        });
+        return $orders;
     }
 
     public function numberOfOrders()
@@ -84,25 +68,7 @@ class OrderController extends Controller
         $order->status = $request->input('status');
         $order->save();
 
-        $order->load(['user', 'orderItems.menuItem']);
-
-        $formattedOrder = [
-            'id' => $order->id,
-            'user_name' => $order->user->name,
-            'delivery_address' => $order->delivery_address,
-            'total' => $order->total,
-            'status' => $order->status,
-            'created_at' => $order->created_at,
-            'updated_at' => $order->updated_at,
-            'items' => $order->orderItems->map(function ($orderItem) {
-                return [
-                    'name' => $orderItem->menuItem->name,
-                    'quantity' => $orderItem->menu_item_quantity,
-                ];
-            }),
-        ];
-
-        return response()->json(['message' => 'Sikeres módosítás', 'order' => $formattedOrder]);
+        return $this->index();
     }
 
     public function userOrders($id)
@@ -117,5 +83,13 @@ class OrderController extends Controller
         $user = Auth::user();
         $orders = Order::where('user_id', $user->id)->where('status', 'készül')->get();
         return $orders;
+    }
+
+    public function destroy($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->delete();
+
+        return $this->index();
     }
 }

@@ -57,9 +57,9 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::get('/total-revenue', [OrderController::class, 'totalRevenue']);
         Route::get('/revenue-by-days/{days}', [OrderController::class, 'revenueByDays']);
 
-
         Route::delete('/users/{id}', [UserController::class, 'destroy']);
         Route::delete('/menu-items/{id}', [MenuItemController::class, 'destroy']);
+        Route::delete('order/{id}', [OrderController::class, 'destroy']);
 
         Route::put('/menu-items/{id}/name', [MenuItemController::class, 'updateName']);
         Route::put('/menu-items/{id}/price', [MenuItemController::class, 'updatePrice']);
