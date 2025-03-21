@@ -39,7 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/user/email', [UserController::class, 'updateEmail']);
     Route::patch('/user/address', [UserController::class, 'updateAddress']);
 
-    Route::put('/user/update-profile', [UserController::class, 'updateProfile']);
+    Route::patch('/user/update-profile', [UserController::class, 'updateProfile']);
     Route::put('/user/update-full-address', [UserController::class, 'updateFullAddress']);
     Route::put('/user/password', [UserController::class, 'changePassword']);
 
