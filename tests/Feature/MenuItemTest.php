@@ -2,12 +2,10 @@
 
 use App\Models\MenuItem;
 use App\Models\Category;
-use App\Models\Composition;
 use App\Models\Ingredient;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
 
 uses(RefreshDatabase::class);
 
