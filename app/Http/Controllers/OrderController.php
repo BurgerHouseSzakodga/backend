@@ -11,7 +11,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with(['user', 'orderItems.menuItem'])->get();
+        $orders = Order::with(['user', 'orderItems.menuItem', 'orderItems.extras.ingredients'])->get();
 
         return $orders;
     }

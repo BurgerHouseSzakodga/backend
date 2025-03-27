@@ -12,7 +12,6 @@ class BasketItem extends Model
     protected $fillable = [
         'basket_id',
         'item_id',
-        'item',
         'buying_price'
     ];
 

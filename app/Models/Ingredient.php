@@ -13,4 +13,9 @@ class Ingredient extends Model
         'name',
         'extra_price',
     ];
+
+    public function extras()
+    {
+        $this->hasMany(OrderItemExtra::class);
+    }
 }
