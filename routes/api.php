@@ -22,7 +22,6 @@ Route::get('/not-in-discounts', [MenuItemController::class, 'notInDiscounts']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/ingredients', [IngredientController::class, 'index']);
 Route::get('popular-items', [MenuItemController::class, 'popularItems']);
-Route::get('/categories-with-items', [MenuItemController::class, 'getCategoriesWithItems']);
 
 //Auth útvonalak
 Route::middleware('auth:sanctum')->group(function () {
@@ -56,10 +55,12 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::get('/pending-orders', [OrderController::class, 'pendingOrders']);
         Route::get('/total-revenue', [OrderController::class, 'totalRevenue']);
         Route::get('/revenue-by-days/{days}', [OrderController::class, 'revenueByDays']);
-
+        Route::get('/number-of-deliveries', [OrderController::class, 'numberOfDeliveries']);
+        Route::get('/number-of-collects', [OrderController::class, 'numberOfCollects']);
 
         Route::delete('/users/{id}', [UserController::class, 'destroy']);
         Route::delete('/menu-items/{id}', [MenuItemController::class, 'destroy']);
+        Route::delete('order/{id}', [OrderController::class, 'destroy']);
 
         Route::put('/menu-items/{id}/name', [MenuItemController::class, 'updateName']);
         Route::put('/menu-items/{id}/price', [MenuItemController::class, 'updatePrice']);
@@ -74,6 +75,3 @@ Route::middleware(['auth:sanctum', Admin::class])
         Route::post('/menu-items/{id}/image', [MenuItemController::class, 'updateImage']);
         Route::post('/menu-items', [MenuItemController::class, 'store']);
     });
-
-//ételek kategóriákkal
-Route::get('/categories-with-items', [MenuItemController::class, 'getCategoriesWithItems']);

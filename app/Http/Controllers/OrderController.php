@@ -21,6 +21,16 @@ class OrderController extends Controller
         return Order::all()->count();
     }
 
+    public function numberOfDeliveries()
+    {
+        return Order::where('delivery_address', '!=', null)->count();
+    }
+
+    public function numberOfCollects()
+    {
+        return Order::where('delivery_address', null)->count();
+    }
+
     public function totalRevenue()
     {
         return Order::sum('total');
@@ -74,7 +84,7 @@ class OrderController extends Controller
     public function userOrders($id)
     {
         $user = Auth::user();
-        $orders = Order::where('user_id', $id)->with(['user', 'orderItems.menuItem'])->get();
+        $orders = Order::where('user_id', $id)->with(['user', 'orderItems.menuItem', 'orderItems.extras.ingredients'])->get();
         return $orders;
     }
 

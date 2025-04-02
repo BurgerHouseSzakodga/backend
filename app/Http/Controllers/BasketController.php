@@ -24,7 +24,7 @@ class BasketController extends Controller
             'discount_amount' => 'required|integer',
             'category_id' => 'required|integer|exists:categories,id',
             'category_name' => 'required|string',
-            'compositions' => 'required|array',
+            'compositions' => 'sometimes|array',
             'compositions.*.ingredient_id' => 'required|integer|exists:ingredients,id',
             'compositions.*.ingredient_name' => 'required|string',
             'compositions.*.extra_price' => 'required|integer',
