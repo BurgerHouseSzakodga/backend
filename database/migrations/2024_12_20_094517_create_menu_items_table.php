@@ -33,19 +33,19 @@ return new class extends Migration
         MenuItem::create(['name' => 'grill szendvics', 'description' => 'Grillezett csirkemell, pirított zsemle, salátával, paradicsommal és majonézzel.', 'category_id' => 1, 'image_path' => 'http://localhost:8000/images/grill-sandwich.jpg', 'price' => 1590]);
 
         // Italok
-        MenuItem::create(['name' => 'Coca-Cola', 'description' => 'Frissítő szénsavas üdítőital.', 'category_id' => 2, 'image_path' => 'http://localhost:8000/images/coca-cola.jpg', 'price' => 490]);
-        MenuItem::create(['name' => 'Narancslé', 'description' => '100%-os frissen facsart narancslé.', 'category_id' => 2, 'image_path' => 'http://localhost:8000/images/orange-juice.jpg', 'price' => 590]);
-        MenuItem::create(['name' => 'Ásványvíz', 'description' => 'Szénsavmentes ásványvíz.', 'category_id' => 2, 'image_path' => 'http://localhost:8000/images/mineral-water.jpg', 'price' => 390]);
+        MenuItem::create(['name' => 'Coca-Cola', 'description' => 'Frissítő szénsavas üdítőital.', 'category_id' => 3, 'image_path' => 'http://localhost:8000/images/coca-cola.jpg', 'price' => 490]);
+        MenuItem::create(['name' => 'Narancslé', 'description' => '100%-os frissen facsart narancslé.', 'category_id' => 3, 'image_path' => 'http://localhost:8000/images/orange-juice.jpg', 'price' => 590]);
+        MenuItem::create(['name' => 'Ásványvíz', 'description' => 'Szénsavmentes ásványvíz.', 'category_id' => 3, 'image_path' => 'http://localhost:8000/images/mineral-water.jpg', 'price' => 390]);
 
         // Köretek
-        MenuItem::create(['name' => 'Hasábburgonya', 'description' => 'Ropogósra sült hasábburgonya.', 'category_id' => 3, 'image_path' => 'http://localhost:8000/images/french-fries.jpg', 'price' => 690]);
-        MenuItem::create(['name' => 'Rizs', 'description' => 'Párolt fehér rizs.', 'category_id' => 3, 'image_path' => 'http://localhost:8000/images/rice.jpg', 'price' => 590]);
-        MenuItem::create(['name' => 'Saláta', 'description' => 'Friss zöldségekből készült saláta.', 'category_id' => 3, 'image_path' => 'http://localhost:8000/images/salad.jpg', 'price' => 790]);
+        MenuItem::create(['name' => 'Hasábburgonya', 'description' => 'Ropogósra sült hasábburgonya.', 'category_id' => 4, 'image_path' => 'http://localhost:8000/images/french-fries.jpg', 'price' => 690]);
+        MenuItem::create(['name' => 'Rizs', 'description' => 'Párolt fehér rizs.', 'category_id' => 4, 'image_path' => 'http://localhost:8000/images/rice.jpg', 'price' => 590]);
+        MenuItem::create(['name' => 'Saláta', 'description' => 'Friss zöldségekből készült saláta.', 'category_id' => 4, 'image_path' => 'http://localhost:8000/images/salad.jpg', 'price' => 790]);
 
         // Desszertek
-        MenuItem::create(['name' => 'Csokoládétorta', 'description' => 'Gazdag csokoládés sütemény.', 'category_id' => 4, 'image_path' => 'http://localhost:8000/images/chocolate-cake.jpg', 'price' => 990]);
-        MenuItem::create(['name' => 'Fagylaltkehely', 'description' => 'Három gombóc fagylalt tejszínhabbal.', 'category_id' => 4, 'image_path' => 'http://localhost:8000/images/ice-cream.jpg', 'price' => 890]);
-        MenuItem::create(['name' => 'Gyümölcssaláta', 'description' => 'Friss gyümölcsökből készült saláta.', 'category_id' => 4, 'image_path' => 'http://localhost:8000/images/fruit-salad.jpg', 'price' => 790]);
+        MenuItem::create(['name' => 'Csokoládétorta', 'description' => 'Gazdag csokoládés sütemény.', 'category_id' => 2, 'image_path' => 'http://localhost:8000/images/chocolate-cake.jpg', 'price' => 990]);
+        MenuItem::create(['name' => 'Fagylaltkehely', 'description' => 'Három gombóc fagylalt tejszínhabbal.', 'category_id' => 2, 'image_path' => 'http://localhost:8000/images/ice-cream.jpg', 'price' => 890]);
+        MenuItem::create(['name' => 'Gyümölcssaláta', 'description' => 'Friss gyümölcsökből készült saláta.', 'category_id' => 2, 'image_path' => 'http://localhost:8000/images/fruit-salad.jpg', 'price' => 790]);
     }
 
     /**
