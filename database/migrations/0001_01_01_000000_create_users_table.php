@@ -44,7 +44,7 @@ return new class extends Migration
             'email' => 'admin@admin.hu',
             'password' => 'admin123',
             'is_admin' => true,
-            'address' => '2040, Budaörs, Lévai utca 29.'
+            'address' => '2040, Budaörs, Lévai utca, 29'
         ]);
 
         User::create([
@@ -52,7 +52,7 @@ return new class extends Migration
             'email' => 'gergolajko@gmail.com',
             'password' => 'gergo123',
             'is_admin' => false,
-            'address' => '2040, Budaörs, Lévai utca 29.'
+            'address' => '2040, Budaörs, Lévai utca, 29'
         ]);
 
         User::create([
@@ -60,7 +60,7 @@ return new class extends Migration
             'email' => 'akoskosztolanyi@gmail.com',
             'password' => 'akos123',
             'is_admin' => false,
-            'address' => '2040, Budaörs, Lévai utca 29.'
+            'address' => '2040, Budaörs, Lévai utca, 29'
         ]);
     }
 
