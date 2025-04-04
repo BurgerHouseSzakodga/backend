@@ -433,4 +433,9 @@ class MenuItemController extends Controller
 
         return response()->json($formattedItems, 200);
     }
+
+    public function numberOfItemsInACategory($id)
+    {
+        return MenuItem::where('category_id', $id)->count();
+    }
 }
