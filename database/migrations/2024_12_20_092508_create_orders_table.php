@@ -21,166 +21,23 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Order::create([
-            'user_id' => 1,
-            'status' => 'készül',
-            'total' => 3750,
-            'delivery_address' => 'Budapest, Kossuth Lajos utca 1.'
-        ]);
+        $addresses = [
+            'Budapest, Kossuth Lajos utca 2.',
+            'Budapest, Petőfi Sándor utca 5.',
+            'Érd, Nagyerdei körút 12.',
+            'Diósd, Tisza Lajos körút 8.',
+            'Budaörs, Baross Gábor utca 3.',
+        ];
 
-        Order::create([
-            'user_id' => 2,
-            'status' => 'készül',
-            'total' => 4660
-        ]);
-
-        Order::create([
-            'user_id' => 3,
-            'status' => 'készül',
-            'total' => 8950,
-            'delivery_address' => 'Budapest, Kossuth Lajos utca 2.'
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
-
-        Order::create([
-            'user_id' => rand(1, 3),
-            'status' => 'kiszállítva',
-            'total' => rand(2000, 15000),
-            'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30))
-        ]);
+        for ($i = 0; $i < 40; $i++) {
+            Order::create([
+                'user_id' => rand(1, 3),
+                'status' => 'kiszállítva',
+                'total' => 0,
+                'delivery_address' => rand(0, 1) ? $addresses[array_rand($addresses)] : null,
+                'created_at' => Carbon\Carbon::now()->subDays(rand(1, 30)),
+            ]);
+        }
     }
 
     /**

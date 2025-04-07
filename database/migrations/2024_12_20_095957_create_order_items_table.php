@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\MenuItem;
+use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -24,55 +26,25 @@ return new class extends Migration
             $table->foreign('menu_item_id')->references('id')->on('menu_items')->onDelete('cascade');
         });
 
-        OrderItem::create([
-            'order_id' => 1,
-            'menu_item_id' => 1,
-        ]);
+        $orders = Order::all();
+        $menuItems = MenuItem::all();
 
-        OrderItem::create([
-            'order_id' => 1,
-            'menu_item_id' => 2,
-        ]);
+        foreach ($orders as $order) {
+            $randomMenuItems = $menuItems->random(rand(1, 3));
+            $total = 0;
 
-        OrderItem::create([
-            'order_id' => 2,
-            'menu_item_id' => 1,
-        ]);
+            foreach ($randomMenuItems as $menuItem) {
+                $orderItem = OrderItem::create([
+                    'order_id' => $order->id,
+                    'menu_item_id' => $menuItem->id,
+                    'buying_price' => $menuItem->price,
+                ]);
 
-        OrderItem::create([
-            'order_id' => 2,
-            'menu_item_id' => 3,
-        ]);
+                $total += $orderItem->buying_price;
+            }
 
-        OrderItem::create([
-            'order_id' => 3,
-            'menu_item_id' => 2,
-        ]);
-
-        OrderItem::create([
-            'order_id' => 3,
-            'menu_item_id' => 4,
-        ]);
-
-        OrderItem::create([
-            'order_id' => 4,
-            'menu_item_id' => 3,
-        ]);
-
-        OrderItem::create([
-            'order_id' => 4,
-            'menu_item_id' => 5,
-        ]);
-
-        OrderItem::create([
-            'order_id' => 5,
-            'menu_item_id' => 1,
-        ]);
-
-        OrderItem::create([
-            'order_id' => 5,
-            'menu_item_id' => 4,
-        ]);
+            $order->update(['total' => $total]);
+        }
     }
 
     /**
