@@ -15,24 +15,46 @@ beforeEach(function () {
     $this->actingAs($this->user);
 });
 
-test('can add an item to the basket', function () {
+test('a felhasználó tud terméket a kosárba rakni', function () {
     $menuItem = MenuItem::factory()->create();
+    $ingredient = Ingredient::factory()->create();
 
     $response = $this->postJson('/api/add-to-basket', [
+        'user_id' => $this->user->id,
         'item_id' => $menuItem->id,
+        'name' => $menuItem->name,
+        'description' => $menuItem->description,
+        'image_path' => $menuItem->image_path,
+        'price' => $menuItem->price,
+        'actual_price' => $menuItem->price,
+        'discount_amount' => 0,
+        'category_id' => $menuItem->category_id,
+        'category_name' => $menuItem->category->name,
         'quantity' => 1,
+        'compositions' => [
+            [
+                'ingredient_id' => $ingredient->id,
+                'ingredient_name' => $ingredient->name,
+                'extra_price' => $ingredient->extra_price,
+                'quantity' => 1,
+            ],
+        ],
     ]);
+
 
     $response->assertStatus(200);
     $this->assertDatabaseHas('basket_items', [
         'item_id' => $menuItem->id,
-        'quantity' => 1,
+        'buying_price' => $menuItem->price,
     ]);
 });
 
-test('can retrieve the user basket', function () {
+test('a felhasználó látja a saját kosarát', function () {
     $basket = Basket::factory()->create(['user' => $this->user->id]);
-    $basketItem = BasketItem::factory()->create(['basket_id' => $basket->id]);
+    $basketItem = BasketItem::factory()->create([
+        'basket_id' => $basket->id,
+        'buying_price' => 1000,
+    ]);
 
     $response = $this->getJson('/api/basket');
 
@@ -40,9 +62,12 @@ test('can retrieve the user basket', function () {
     $response->assertJsonFragment(['id' => $basket->id]);
 });
 
-test('can delete an item from the basket', function () {
+test('a felhasználó tud terméket törölni a kosárból', function () {
     $basket = Basket::factory()->create(['user' => $this->user->id]);
-    $basketItem = BasketItem::factory()->create(['basket_id' => $basket->id]);
+    $basketItem = BasketItem::factory()->create([
+        'basket_id' => $basket->id,
+        'buying_price' => 1000,
+    ]);
 
     $response = $this->deleteJson("/api/delete-basket-item/{$basketItem->id}");
 
@@ -50,9 +75,12 @@ test('can delete an item from the basket', function () {
     $this->assertDatabaseMissing('basket_items', ['id' => $basketItem->id]);
 });
 
-test('can order the basket', function () {
+test('a kosár megrendelhető', function () {
     $basket = Basket::factory()->create(['user' => $this->user->id, 'total_amount' => 1000]);
-    $basketItem = BasketItem::factory()->create(['basket_id' => $basket->id, 'buying_price' => 1000]);
+    $basketItem = BasketItem::factory()->create([
+        'basket_id' => $basket->id,
+        'buying_price' => 1000,
+    ]);
 
     $response = $this->postJson('/api/order-basket');
 
@@ -61,5 +89,5 @@ test('can order the basket', function () {
         'user_id' => $this->user->id,
         'total' => 1000,
     ]);
-    $this->assertDatabaseMissing('baskets', ['id' => $basket->id]);
+    $this->assertDatabaseHas('baskets', ['id' => $basket->id]);
 });

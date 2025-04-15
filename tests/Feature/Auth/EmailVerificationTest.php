@@ -5,7 +5,7 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 
-test('email can be verified', function () {
+test('az email címet meg lehet erősíteni', function () {
     $user = User::factory()->unverified()->create();
 
     Event::fake();
@@ -20,7 +20,7 @@ test('email can be verified', function () {
 
     Event::assertDispatched(Verified::class);
     expect($user->fresh()->hasVerifiedEmail())->toBeTrue();
-    $response->assertRedirect(config('app.frontend_url').'/dashboard?verified=1');
+    $response->assertRedirect(config('app.frontend_url') . '/dashboard?verified=1');
 });
 
 test('email is not verified with invalid hash', function () {

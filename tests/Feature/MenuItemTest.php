@@ -14,7 +14,7 @@ beforeEach(function () {
     $this->actingAs($this->user);
 });
 
-test('can create a menu item', function () {
+test('az admin létre tud hozni terméket', function () {
     $category = Category::factory()->create();
     $ingredient = Ingredient::factory()->create();
 
@@ -31,7 +31,7 @@ test('can create a menu item', function () {
     $this->assertDatabaseHas('menu_items', ['name' => 'Test Item']);
 });
 
-test('can update a menu item name', function () {
+test('termék név módosítás', function () {
     $menuItem = MenuItem::factory()->create();
 
     $response = $this->putJson("/api/menu-items/{$menuItem->id}/name", [
@@ -42,7 +42,7 @@ test('can update a menu item name', function () {
     $this->assertDatabaseHas('menu_items', ['name' => 'Updated Item']);
 });
 
-test('can update a menu item price', function () {
+test('termék ár módosítás', function () {
     $menuItem = MenuItem::factory()->create();
 
     $response = $this->putJson("/api/menu-items/{$menuItem->id}/price", [
@@ -53,7 +53,7 @@ test('can update a menu item price', function () {
     $this->assertDatabaseHas('menu_items', ['price' => 1500]);
 });
 
-test('can update a menu item category', function () {
+test('termék kategória módosítás', function () {
     $menuItem = MenuItem::factory()->create();
     $newCategory = Category::factory()->create();
 
@@ -65,7 +65,7 @@ test('can update a menu item category', function () {
     $this->assertDatabaseHas('menu_items', ['category_id' => $newCategory->id]);
 });
 
-test('can update a menu item description', function () {
+test('termék leírás módosítás', function () {
     $menuItem = MenuItem::factory()->create();
 
     $response = $this->putJson("/api/menu-items/{$menuItem->id}/description", [
@@ -76,7 +76,7 @@ test('can update a menu item description', function () {
     $this->assertDatabaseHas('menu_items', ['description' => 'Updated Description']);
 });
 
-test('can delete a menu item', function () {
+test('termék törlése', function () {
     $menuItem = MenuItem::factory()->create();
 
     $response = $this->deleteJson("/api/menu-items/{$menuItem->id}");

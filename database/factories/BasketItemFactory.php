@@ -16,7 +16,6 @@ class BasketItemFactory extends Factory
         return [
             'basket_id' => Basket::factory(),
             'item_id' => MenuItem::factory(),
-            'quantity' => $this->faker->numberBetween(1, 5),
             'buying_price' => $this->faker->numberBetween(1000, 5000),
         ];
     }

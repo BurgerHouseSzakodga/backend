@@ -2,7 +2,7 @@
 
 use App\Models\User;
 
-test('new users can register', function () {
+test('a felhasználó tud regisztrálni', function () {
     $response = $this->post('/register', [
         'name' => 'Test User',
         'email' => 'test@example.com',
@@ -15,7 +15,7 @@ test('new users can register', function () {
     $response->assertNoContent();
 });
 
-test('cant register with duplicate email', function () {
+test('az adatbázisban már létező email címmel nem lehet regisztrálni', function () {
     $user = User::factory()->create([
         'email' => 'test@example.com'
     ]);
