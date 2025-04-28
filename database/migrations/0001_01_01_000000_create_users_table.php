@@ -48,11 +48,11 @@ return new class extends Migration
         ]);
 
         User::create([
-            'name' => 'Gergő',
-            'email' => 'gergolajko@gmail.com',
-            'password' => 'gergo123',
+            'name' => 'User',
+            'email' => 'user@user.hu',
+            'password' => 'user123',
             'is_admin' => false,
-            'address' => '2040, Budaörs, Lévai utca, 29'
+            'address' => '2000, Budaörs, Lévai utca, 29'
         ]);
 
         User::create([
